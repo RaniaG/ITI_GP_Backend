@@ -18,9 +18,9 @@ namespace model.Entities
         public int Subscription { get; set; }
 
         //Address
-        //public Country Country { get; set; }
-        //public string City { get; set; }
-        //public string District { get; set; }
+        public Country Country { get; set; }
+        public City City { get; set; }
+        public District District { get; set; }
         public string PostalCode { get; set; }
         public string Street { get; set; }
 

@@ -25,7 +25,9 @@ namespace model
         public virtual DbSet<ShipmentData> ShipmentDatas { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Shop> Shops { get; set; }
-
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<District> Districts { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -66,6 +68,29 @@ namespace model
             shops.Property(sh => sh.Cover).IsOptional().HasColumnType("nvarchar(max)");
             shops.Property(sh => sh.Policy).IsRequired().HasColumnType("nvarchar(max)");
 
+            /*Country Table*/
+            modelBuilder.Entity<Country>()
+                .ToTable("Country")
+                .HasKey(c => c.Id)
+                .Property(c => c.Name)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+            /*City Table*/
+            modelBuilder.Entity<City>()
+                .ToTable("City")
+                .HasKey(c => c.Id)
+                .Property(c => c.Name)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+            /*District Table*/
+            modelBuilder.Entity<District>()
+                .ToTable("District")
+                .HasKey(c => c.Id)
+                .Property(c => c.Name)
+                    .IsRequired()
+                    .HasMaxLength(200);
 
             //user shipmentData relation
             users.HasMany(u => u.shipmentDatas)
@@ -79,13 +104,24 @@ namespace model
             shipmentData.Property(sd => sd.contactName).IsRequired().HasMaxLength(100);
             shipmentData.Property(sd => sd.contactEmail).IsRequired().HasMaxLength(50);
 
-            //User Shop Realtion
+            //User Shop Relation
             modelBuilder.Entity<User>()
                 .HasOptional(u => u.Shop)
                 .WithRequired(sh => sh.User);
 
+            //Country City Relation
+            modelBuilder.Entity<Country>()
+                .HasMany(c => c.Cities)
+                .WithRequired(c => c.Country)
+                .HasForeignKey(c => c.CountryId)
+                .WillCascadeOnDelete(false);
 
-
+            //City District Relation
+            modelBuilder.Entity<City>()
+                .HasMany(c => c.Districts)
+                .WithRequired(c => c.City)
+                .HasForeignKey(c => c.CityId)
+                .WillCascadeOnDelete(false);
         }
     }
 

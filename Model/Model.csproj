@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\City.cs" />
+    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\District.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ShipmentData.cs" />
     <Compile Include="Entities\Shop.cs" />
@@ -78,6 +81,14 @@
     <Compile Include="Migrations\201906190204474_AddUserShopRelation.Designer.cs">
       <DependentUpon>201906190204474_AddUserShopRelation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906190214481_CreateCountryCityDistrictTables.cs" />
+    <Compile Include="Migrations\201906190214481_CreateCountryCityDistrictTables.Designer.cs">
+      <DependentUpon>201906190214481_CreateCountryCityDistrictTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906190221480_AddCountryCityDistrictRelations.cs" />
+    <Compile Include="Migrations\201906190221480_AddCountryCityDistrictRelations.Designer.cs">
+      <DependentUpon>201906190221480_AddCountryCityDistrictRelations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -104,6 +115,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906190204474_AddUserShopRelation.resx">
       <DependentUpon>201906190204474_AddUserShopRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906190214481_CreateCountryCityDistrictTables.resx">
+      <DependentUpon>201906190214481_CreateCountryCityDistrictTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906190221480_AddCountryCityDistrictRelations.resx">
+      <DependentUpon>201906190221480_AddCountryCityDistrictRelations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
