@@ -28,7 +28,14 @@ namespace model.Entities
         public Boolean active { get; set; }
         public Boolean approved { get; set; }//by website admin
 
-        //shop id
-        //category id
+        public int shop_id { get; set; }
+
+        public int category_id { get; set; }
+
+        public Shop shop { get; set; }
+
+        public Category category { get; set; }
+        
+
     }
 }

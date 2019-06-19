@@ -32,10 +32,10 @@ namespace model
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<ReviewRating> Reviews { get; set; }
-
         public virtual DbSet<OrderProduct> OrderProducts { get; set; }
-
         public virtual DbSet<Package> Packages { get; set; }
+        public virtual DbSet<Cart> Cart { get; set; }
+
 
 
 
@@ -181,7 +181,17 @@ namespace model
             packages.HasKey(p => new { p.order_id, p.shop_id, p.id });
 
 
-            
+            /*product relations table*/
+            products.HasRequired(p => p.shop);
+            products.HasRequired(p => p.category);
+
+
+            /*Cart table*/
+            var cart = modelBuilder.Entity<Cart>();
+            cart.HasKey(c => new { c.product_id, c.user_id });
+            cart.HasRequired(c => c.user);
+            cart.HasRequired(c => c.product);
+            cart.Property(c => c.variations).HasColumnType("nvarchar(max)");
 
         }
     }

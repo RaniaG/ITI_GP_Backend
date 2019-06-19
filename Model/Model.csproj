@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Country.cs" />
@@ -121,6 +122,14 @@
     <Compile Include="Migrations\201906191143015_createCategory-ReviewsModels.Designer.cs">
       <DependentUpon>201906191143015_createCategory-ReviewsModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906191311337_productTableRelations.cs" />
+    <Compile Include="Migrations\201906191311337_productTableRelations.Designer.cs">
+      <DependentUpon>201906191311337_productTableRelations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906191312387_createdCartTable.cs" />
+    <Compile Include="Migrations\201906191312387_createdCartTable.Designer.cs">
+      <DependentUpon>201906191312387_createdCartTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -171,6 +180,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906191143015_createCategory-ReviewsModels.resx">
       <DependentUpon>201906191143015_createCategory-ReviewsModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906191311337_productTableRelations.resx">
+      <DependentUpon>201906191311337_productTableRelations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906191312387_createdCartTable.resx">
+      <DependentUpon>201906191312387_createdCartTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
