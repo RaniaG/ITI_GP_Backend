@@ -199,6 +199,10 @@ namespace model
             shipmentData.HasRequired(c => c.country);
             shipmentData.HasRequired(c => c.district);
 
+            /*ReviewRating Table relations*/
+            reviews.HasRequired(r => r.user);
+            reviews.HasRequired(r => r.product);
+            reviews.HasRequired(r => r.shop);
 
         }
     }

@@ -134,6 +134,10 @@
     <Compile Include="Migrations\201906191327523_updatedShipmentDataRelations.Designer.cs">
       <DependentUpon>201906191327523_updatedShipmentDataRelations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906191345217_updatedReviewsRelations.cs" />
+    <Compile Include="Migrations\201906191345217_updatedReviewsRelations.Designer.cs">
+      <DependentUpon>201906191345217_updatedReviewsRelations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -193,6 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906191327523_updatedShipmentDataRelations.resx">
       <DependentUpon>201906191327523_updatedShipmentDataRelations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906191345217_updatedReviewsRelations.resx">
+      <DependentUpon>201906191345217_updatedReviewsRelations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

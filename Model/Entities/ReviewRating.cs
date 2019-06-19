@@ -16,5 +16,15 @@ namespace model.Entities
         public int ProductRating { get; set; }
         public int ShopRating { get; set; }
 
+        public User user { get; set; }
+
+        public int user_id { get; set; }
+        public Product  product { get; set; }
+        public int product_id { get; set; }
+        public Shop shop { get; set; }
+        public int shop_id { get; set; }
+
+
+
     }
 }
