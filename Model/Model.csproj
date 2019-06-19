@@ -130,6 +130,10 @@
     <Compile Include="Migrations\201906191312387_createdCartTable.Designer.cs">
       <DependentUpon>201906191312387_createdCartTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906191327523_updatedShipmentDataRelations.cs" />
+    <Compile Include="Migrations\201906191327523_updatedShipmentDataRelations.Designer.cs">
+      <DependentUpon>201906191327523_updatedShipmentDataRelations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -186,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906191312387_createdCartTable.resx">
       <DependentUpon>201906191312387_createdCartTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906191327523_updatedShipmentDataRelations.resx">
+      <DependentUpon>201906191327523_updatedShipmentDataRelations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

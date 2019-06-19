@@ -193,6 +193,13 @@ namespace model
             cart.HasRequired(c => c.product);
             cart.Property(c => c.variations).HasColumnType("nvarchar(max)");
 
+
+            /*ShipmentData city,country,district relations*/
+            shipmentData.HasRequired(c => c.city);
+            shipmentData.HasRequired(c => c.country);
+            shipmentData.HasRequired(c => c.district);
+
+
         }
     }
 

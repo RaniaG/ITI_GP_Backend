@@ -19,6 +19,14 @@ namespace model.Entities
         public string contactEmail { get; set; }
 
         //city id
+        public City city { get; set; }
+
+        public int city_id { get; set; }
         //country id
+        public Country country { get; set; }
+        public int country_id { get; set; }
+
+        public District district { get; set; }
+        public int district_id { get; set; }
     }
 }
