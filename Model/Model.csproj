@@ -52,9 +52,18 @@
   <ItemGroup>
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ShipmentData.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Migrations\201906182339417_createdProductEntity.cs" />
     <Compile Include="Migrations\201906182339417_createdProductEntity.Designer.cs">
       <DependentUpon>201906182339417_createdProductEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906190048097_createShipmentData.cs" />
+    <Compile Include="Migrations\201906190048097_createShipmentData.Designer.cs">
+      <DependentUpon>201906190048097_createShipmentData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906190050495_updateShipmentData.cs" />
+    <Compile Include="Migrations\201906190050495_updateShipmentData.Designer.cs">
+      <DependentUpon>201906190050495_updateShipmentData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model.cs" />
@@ -67,6 +76,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201906182339417_createdProductEntity.resx">
       <DependentUpon>201906182339417_createdProductEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906190048097_createShipmentData.resx">
+      <DependentUpon>201906190048097_createShipmentData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906190050495_updateShipmentData.resx">
+      <DependentUpon>201906190050495_updateShipmentData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

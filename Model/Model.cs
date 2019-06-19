@@ -22,10 +22,16 @@ namespace model
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ShipmentData> ShipmentDatas { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //base.OnModelCreating(modelBuilder);
+
+            /*Products table*/
             var products=modelBuilder.Entity<Product>();
             products.HasKey(p => p.id);
             products.Property(p => p.name)
@@ -36,6 +42,23 @@ namespace model
             products.Property(p => p.images).IsOptional().HasColumnType("nvarchar(max)");
             products.Property(p => p.publishTime).IsOptional();
             products.Property(p => p.lifeTime).IsOptional();
+
+            /*user table*/
+            var users = modelBuilder.Entity<User>();
+            users.HasKey(u => u.id);
+
+            //user shipmentData relation
+            users.HasMany(u => u.shipmentDatas)
+                .WithRequired(sd => sd.user)
+                .HasForeignKey(sd => sd.user_id);
+
+            /*Shipment data table*/
+            var shipmentData = modelBuilder.Entity<ShipmentData>();
+            shipmentData.HasKey(sd => new { sd.id, sd.user_id });
+            shipmentData.Property(sd => sd.fullAddress).IsRequired().HasMaxLength(200);
+            shipmentData.Property(sd => sd.contactName).IsRequired().HasMaxLength(100);
+            shipmentData.Property(sd => sd.contactEmail).IsRequired().HasMaxLength(50);
+
 
 
         }
