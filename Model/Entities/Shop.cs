@@ -16,6 +16,7 @@ namespace model.Entities
         public string About { get; set; }
         public string Policy { get; set; }
         public int Subscription { get; set; }
+        public char IsDeleted { get; set; }
 
         //Address
         public Country Country { get; set; }

@@ -30,6 +30,8 @@ namespace model
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<ReviewRating> Reviews { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -94,6 +96,25 @@ namespace model
                     .IsRequired()
                     .HasMaxLength(200);
 
+            /*Category table*/
+            var categories = modelBuilder.Entity<Category>();
+            categories.ToTable("Category")
+                .HasKey(cat => cat.Id);
+            categories.Property(cat => cat.Name)
+                    .IsRequired()
+                    .HasMaxLength(200);
+            categories.HasIndex(cat => cat.Name).IsUnique();
+
+            /*Review Rating Table*/
+            var reviews = modelBuilder.Entity<ReviewRating>();
+            reviews.ToTable("Review")
+                .HasKey(r => r.Id);
+            reviews.Property(r => r.Date)
+                .IsRequired();
+            reviews.Property(r => r.Review)
+                .IsRequired()
+                .HasColumnType("Text");
+
             //user shipmentData relation
             users.HasMany(u => u.shipmentDatas)
                 .WithRequired(sd => sd.user)
@@ -108,9 +129,14 @@ namespace model
             shipmentData.Property(sd => sd.contactEmail).IsRequired().HasMaxLength(50);
 
             //User Shop Relation
+            //modelBuilder.Entity<User>()
+            //    .HasOptional(u => u.Shop)
+            //    .WithRequired(sh => sh.User);
+
             modelBuilder.Entity<User>()
-                .HasOptional(u => u.Shop)
-                .WithRequired(sh => sh.User);
+                .HasRequired(u => u.Shop)
+                .WithRequiredPrincipal(sh => sh.User);
+
 
             //Country City Relation
             modelBuilder.Entity<Country>()

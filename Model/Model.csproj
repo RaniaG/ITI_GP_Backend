@@ -50,11 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\District.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\ReviewRating.cs" />
     <Compile Include="Entities\ShipmentData.cs" />
     <Compile Include="Entities\Shop.cs" />
     <Compile Include="Entities\User.cs" />
