@@ -1,5 +1,6 @@
-namespace Model
+namespace model
 {
+    using global::model.Entities;
     using System;
     using System.Data.Entity;
     using System.Linq;
@@ -20,7 +21,24 @@ namespace Model
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
-        // public virtual DbSet<MyEntity> MyEntities { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //base.OnModelCreating(modelBuilder);
+            var products=modelBuilder.Entity<Product>();
+            products.HasKey(p => p.id);
+            products.Property(p => p.name)
+                .IsRequired().HasMaxLength(100);
+            products.Property(p => p.description).IsOptional().HasColumnType("nvarchar(max)");
+            products.Property(p => p.terms).IsOptional().HasColumnType("nvarchar(max)");
+            products.Property(p => p.variations).IsOptional().HasColumnType("nvarchar(max)");
+            products.Property(p => p.images).IsOptional().HasColumnType("nvarchar(max)");
+            products.Property(p => p.publishTime).IsOptional();
+            products.Property(p => p.lifeTime).IsOptional();
+
+
+        }
     }
 
     //public class MyEntity
