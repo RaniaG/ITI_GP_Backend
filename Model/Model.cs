@@ -31,6 +31,8 @@ namespace model
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
 
+        public virtual DbSet<OrderProduct> OrderProducts { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -125,7 +127,7 @@ namespace model
             orders.HasKey(o => o.id);
             orders.HasRequired(o => o.shipmentData);
             orders.HasRequired(o => o.user);
-            
+
 
 
             //City District Relation
@@ -134,6 +136,14 @@ namespace model
                 .WithRequired(c => c.City)
                 .HasForeignKey(c => c.CityId)
                 .WillCascadeOnDelete(false);
+
+           
+            /*OrderProducts table*/
+            var orderProducts = modelBuilder.Entity<OrderProduct>();
+            orderProducts.HasRequired(op => op.order);
+            orderProducts.HasRequired(op => op.product);
+            orderProducts.HasKey(op => new { op.order_id, op.product_id })
+                .Property(op => op.variations).HasMaxLength(200);
         }
     }
 
