@@ -50,9 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\City.cs" />
+    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\District.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ShipmentData.cs" />
+    <Compile Include="Entities\Shop.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Enums\OrderStatus.cs" />
     <Compile Include="Enums\PaymentMethods.cs" />
@@ -67,6 +71,26 @@
     <Compile Include="Migrations\201906190050495_updateShipmentData.cs" />
     <Compile Include="Migrations\201906190050495_updateShipmentData.Designer.cs">
       <DependentUpon>201906190050495_updateShipmentData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906190150541_userTableFields.cs" />
+    <Compile Include="Migrations\201906190150541_userTableFields.Designer.cs">
+      <DependentUpon>201906190150541_userTableFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906190200598_CreateShopTable.cs" />
+    <Compile Include="Migrations\201906190200598_CreateShopTable.Designer.cs">
+      <DependentUpon>201906190200598_CreateShopTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906190204474_AddUserShopRelation.cs" />
+    <Compile Include="Migrations\201906190204474_AddUserShopRelation.Designer.cs">
+      <DependentUpon>201906190204474_AddUserShopRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906190214481_CreateCountryCityDistrictTables.cs" />
+    <Compile Include="Migrations\201906190214481_CreateCountryCityDistrictTables.Designer.cs">
+      <DependentUpon>201906190214481_CreateCountryCityDistrictTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906190221480_AddCountryCityDistrictRelations.cs" />
+    <Compile Include="Migrations\201906190221480_AddCountryCityDistrictRelations.Designer.cs">
+      <DependentUpon>201906190221480_AddCountryCityDistrictRelations.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201906190109030_updateShipmentDataAddedIdentity.cs" />
     <Compile Include="Migrations\201906190109030_updateShipmentDataAddedIdentity.Designer.cs">
@@ -99,6 +123,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906190122499_createOrdersTable.resx">
       <DependentUpon>201906190122499_createOrdersTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906190150541_userTableFields.resx">
+      <DependentUpon>201906190150541_userTableFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906190200598_CreateShopTable.resx">
+      <DependentUpon>201906190200598_CreateShopTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906190204474_AddUserShopRelation.resx">
+      <DependentUpon>201906190204474_AddUserShopRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906190214481_CreateCountryCityDistrictTables.resx">
+      <DependentUpon>201906190214481_CreateCountryCityDistrictTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906190221480_AddCountryCityDistrictRelations.resx">
+      <DependentUpon>201906190221480_AddCountryCityDistrictRelations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
