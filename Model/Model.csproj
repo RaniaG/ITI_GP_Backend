@@ -50,9 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ShipmentData.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Enums\OrderStatus.cs" />
+    <Compile Include="Enums\PaymentMethods.cs" />
     <Compile Include="Migrations\201906182339417_createdProductEntity.cs" />
     <Compile Include="Migrations\201906182339417_createdProductEntity.Designer.cs">
       <DependentUpon>201906182339417_createdProductEntity.cs</DependentUpon>
@@ -64,6 +67,14 @@
     <Compile Include="Migrations\201906190050495_updateShipmentData.cs" />
     <Compile Include="Migrations\201906190050495_updateShipmentData.Designer.cs">
       <DependentUpon>201906190050495_updateShipmentData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906190109030_updateShipmentDataAddedIdentity.cs" />
+    <Compile Include="Migrations\201906190109030_updateShipmentDataAddedIdentity.Designer.cs">
+      <DependentUpon>201906190109030_updateShipmentDataAddedIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906190122499_createOrdersTable.cs" />
+    <Compile Include="Migrations\201906190122499_createOrdersTable.Designer.cs">
+      <DependentUpon>201906190122499_createOrdersTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model.cs" />
@@ -82,6 +93,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906190050495_updateShipmentData.resx">
       <DependentUpon>201906190050495_updateShipmentData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906190109030_updateShipmentDataAddedIdentity.resx">
+      <DependentUpon>201906190109030_updateShipmentDataAddedIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906190122499_createOrdersTable.resx">
+      <DependentUpon>201906190122499_createOrdersTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

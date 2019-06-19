@@ -2,6 +2,7 @@ namespace model
 {
     using global::model.Entities;
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
     using System.Linq;
 
@@ -24,7 +25,7 @@ namespace model
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ShipmentData> ShipmentDatas { get; set; }
         public virtual DbSet<User> Users { get; set; }
-
+        public virtual DbSet<Order> Orders { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -55,10 +56,18 @@ namespace model
             /*Shipment data table*/
             var shipmentData = modelBuilder.Entity<ShipmentData>();
             shipmentData.HasKey(sd => new { sd.id, sd.user_id });
+            shipmentData.Property(sd => sd.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             shipmentData.Property(sd => sd.fullAddress).IsRequired().HasMaxLength(200);
             shipmentData.Property(sd => sd.contactName).IsRequired().HasMaxLength(100);
             shipmentData.Property(sd => sd.contactEmail).IsRequired().HasMaxLength(50);
 
+
+            /*Orders table*/
+            var orders = modelBuilder.Entity<Order>();
+            orders.HasKey(o => o.id);
+            orders.HasRequired(o => o.shipmentData);
+            orders.HasRequired(o => o.user);
+            
 
 
         }
