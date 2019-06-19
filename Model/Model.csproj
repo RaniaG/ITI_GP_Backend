@@ -55,6 +55,8 @@
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\District.cs" />
     <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrderProduct.cs" />
+    <Compile Include="Entities\Package.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ReviewRating.cs" />
     <Compile Include="Entities\ShipmentData.cs" />
@@ -98,9 +100,21 @@
     <Compile Include="Migrations\201906190109030_updateShipmentDataAddedIdentity.Designer.cs">
       <DependentUpon>201906190109030_updateShipmentDataAddedIdentity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906190122499_createOrdersTable.cs" />
-    <Compile Include="Migrations\201906190122499_createOrdersTable.Designer.cs">
-      <DependentUpon>201906190122499_createOrdersTable.cs</DependentUpon>
+    <Compile Include="Migrations\201906191100135_alterShipmentDataTableIdentity.cs" />
+    <Compile Include="Migrations\201906191100135_alterShipmentDataTableIdentity.Designer.cs">
+      <DependentUpon>201906191100135_alterShipmentDataTableIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906191100553_createdOrdersTable.cs" />
+    <Compile Include="Migrations\201906191100553_createdOrdersTable.Designer.cs">
+      <DependentUpon>201906191100553_createdOrdersTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906191108485_createdOrderProductsTable.cs" />
+    <Compile Include="Migrations\201906191108485_createdOrderProductsTable.Designer.cs">
+      <DependentUpon>201906191108485_createdOrderProductsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906191124007_createdPackageTable.cs" />
+    <Compile Include="Migrations\201906191124007_createdPackageTable.Designer.cs">
+      <DependentUpon>201906191124007_createdPackageTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model.cs" />
@@ -123,9 +137,6 @@
     <EmbeddedResource Include="Migrations\201906190109030_updateShipmentDataAddedIdentity.resx">
       <DependentUpon>201906190109030_updateShipmentDataAddedIdentity.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906190122499_createOrdersTable.resx">
-      <DependentUpon>201906190122499_createOrdersTable.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906190150541_userTableFields.resx">
       <DependentUpon>201906190150541_userTableFields.cs</DependentUpon>
     </EmbeddedResource>
@@ -140,6 +151,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906190221480_AddCountryCityDistrictRelations.resx">
       <DependentUpon>201906190221480_AddCountryCityDistrictRelations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906191100135_alterShipmentDataTableIdentity.resx">
+      <DependentUpon>201906191100135_alterShipmentDataTableIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906191100553_createdOrdersTable.resx">
+      <DependentUpon>201906191100553_createdOrdersTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906191108485_createdOrderProductsTable.resx">
+      <DependentUpon>201906191108485_createdOrderProductsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906191124007_createdPackageTable.resx">
+      <DependentUpon>201906191124007_createdPackageTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,13 +7,13 @@ namespace model.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class createOrdersTable : IMigrationMetadata
+    public sealed partial class alterShipmentDataTableIdentity : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(createOrdersTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(alterShipmentDataTableIdentity));
         
         string IMigrationMetadata.Id
         {
-            get { return "201906190122499_createOrdersTable"; }
+            get { return "201906191100135_alterShipmentDataTableIdentity"; }
         }
         
         string IMigrationMetadata.Source

@@ -33,6 +33,11 @@ namespace model
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<ReviewRating> Reviews { get; set; }
 
+        public virtual DbSet<OrderProduct> OrderProducts { get; set; }
+
+        public virtual DbSet<Package> Packages { get; set; }
+
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -151,7 +156,7 @@ namespace model
             orders.HasKey(o => o.id);
             orders.HasRequired(o => o.shipmentData);
             orders.HasRequired(o => o.user);
-            
+
 
 
             //City District Relation
@@ -160,6 +165,24 @@ namespace model
                 .WithRequired(c => c.City)
                 .HasForeignKey(c => c.CityId)
                 .WillCascadeOnDelete(false);
+
+           
+            /*OrderProducts table*/
+            var orderProducts = modelBuilder.Entity<OrderProduct>();
+            orderProducts.HasRequired(op => op.order);
+            orderProducts.HasRequired(op => op.product);
+            orderProducts.HasKey(op => new { op.order_id, op.product_id })
+                .Property(op => op.variations).HasMaxLength(200);
+
+            /*Package table*/
+            var packages = modelBuilder.Entity<Package>();
+            packages.HasRequired(p => p.shop);
+            packages.HasRequired(p => p.order);
+            packages.HasKey(p => new { p.order_id, p.shop_id, p.id });
+
+
+            
+
         }
     }
 
