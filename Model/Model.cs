@@ -33,6 +33,9 @@ namespace model
 
         public virtual DbSet<OrderProduct> OrderProducts { get; set; }
 
+        public virtual DbSet<Package> Packages { get; set; }
+
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -144,6 +147,16 @@ namespace model
             orderProducts.HasRequired(op => op.product);
             orderProducts.HasKey(op => new { op.order_id, op.product_id })
                 .Property(op => op.variations).HasMaxLength(200);
+
+            /*Package table*/
+            var packages = modelBuilder.Entity<Package>();
+            packages.HasRequired(p => p.shop);
+            packages.HasRequired(p => p.order);
+            packages.HasKey(p => new { p.order_id, p.shop_id, p.id });
+
+
+            
+
         }
     }
 

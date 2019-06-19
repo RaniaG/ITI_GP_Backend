@@ -55,6 +55,7 @@
     <Compile Include="Entities\District.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\OrderProduct.cs" />
+    <Compile Include="Entities\Package.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ShipmentData.cs" />
     <Compile Include="Entities\Shop.cs" />
@@ -109,6 +110,10 @@
     <Compile Include="Migrations\201906191108485_createdOrderProductsTable.Designer.cs">
       <DependentUpon>201906191108485_createdOrderProductsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906191124007_createdPackageTable.cs" />
+    <Compile Include="Migrations\201906191124007_createdPackageTable.Designer.cs">
+      <DependentUpon>201906191124007_createdPackageTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -153,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906191108485_createdOrderProductsTable.resx">
       <DependentUpon>201906191108485_createdOrderProductsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906191124007_createdPackageTable.resx">
+      <DependentUpon>201906191124007_createdPackageTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
