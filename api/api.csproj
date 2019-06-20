@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -236,12 +237,133 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Enums\Gender.cs" />
+    <Compile Include="Enums\OrderStatus.cs" />
+    <Compile Include="Enums\PaymentMethods.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906192115003_initialMigrationIdentity.cs" />
+    <Compile Include="Migrations\201906192115003_initialMigrationIdentity.Designer.cs">
+      <DependentUpon>201906192115003_initialMigrationIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906192132378_updatedUserTable.cs" />
+    <Compile Include="Migrations\201906192132378_updatedUserTable.Designer.cs">
+      <DependentUpon>201906192132378_updatedUserTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906192202552_createdProductTable.cs" />
+    <Compile Include="Migrations\201906192202552_createdProductTable.Designer.cs">
+      <DependentUpon>201906192202552_createdProductTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906192218382_createdShopsTable.cs" />
+    <Compile Include="Migrations\201906192218382_createdShopsTable.Designer.cs">
+      <DependentUpon>201906192218382_createdShopsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906192231264_createdOrdersTable.cs" />
+    <Compile Include="Migrations\201906192231264_createdOrdersTable.Designer.cs">
+      <DependentUpon>201906192231264_createdOrdersTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906192235596_createdCategoryTable.cs" />
+    <Compile Include="Migrations\201906192235596_createdCategoryTable.Designer.cs">
+      <DependentUpon>201906192235596_createdCategoryTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906192242291_createdCitiesTable.cs" />
+    <Compile Include="Migrations\201906192242291_createdCitiesTable.Designer.cs">
+      <DependentUpon>201906192242291_createdCitiesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906192244124_createdCountiesTable.cs" />
+    <Compile Include="Migrations\201906192244124_createdCountiesTable.Designer.cs">
+      <DependentUpon>201906192244124_createdCountiesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906192245574_createdDistrictTable.cs" />
+    <Compile Include="Migrations\201906192245574_createdDistrictTable.Designer.cs">
+      <DependentUpon>201906192245574_createdDistrictTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906192248028_createdReviewRatingTable.cs" />
+    <Compile Include="Migrations\201906192248028_createdReviewRatingTable.Designer.cs">
+      <DependentUpon>201906192248028_createdReviewRatingTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906192254388_updatedReviewRatingTable.cs" />
+    <Compile Include="Migrations\201906192254388_updatedReviewRatingTable.Designer.cs">
+      <DependentUpon>201906192254388_updatedReviewRatingTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906192255529_changedAllTableNames.cs" />
+    <Compile Include="Migrations\201906192255529_changedAllTableNames.Designer.cs">
+      <DependentUpon>201906192255529_changedAllTableNames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906192350568_createdCartTableRelations.cs" />
+    <Compile Include="Migrations\201906192350568_createdCartTableRelations.Designer.cs">
+      <DependentUpon>201906192350568_createdCartTableRelations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906192358198_updatedCartTableRelations.cs" />
+    <Compile Include="Migrations\201906192358198_updatedCartTableRelations.Designer.cs">
+      <DependentUpon>201906192358198_updatedCartTableRelations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906200004198_createdVisitsTable.cs" />
+    <Compile Include="Migrations\201906200004198_createdVisitsTable.Designer.cs">
+      <DependentUpon>201906200004198_createdVisitsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906200012074_CountryCityDistrictRelations.cs" />
+    <Compile Include="Migrations\201906200012074_CountryCityDistrictRelations.Designer.cs">
+      <DependentUpon>201906200012074_CountryCityDistrictRelations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906200023193_createdShipmentDataTable.cs" />
+    <Compile Include="Migrations\201906200023193_createdShipmentDataTable.Designer.cs">
+      <DependentUpon>201906200023193_createdShipmentDataTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906200116376_productCategoryRelation.cs" />
+    <Compile Include="Migrations\201906200116376_productCategoryRelation.Designer.cs">
+      <DependentUpon>201906200116376_productCategoryRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906200118062_dfgdfgdfg.cs" />
+    <Compile Include="Migrations\201906200118062_dfgdfgdfg.designer.cs">
+      <DependentUpon>201906200118062_dfgdfgdfg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906200132485_productShopRelation.cs" />
+    <Compile Include="Migrations\201906200132485_productShopRelation.Designer.cs">
+      <DependentUpon>201906200132485_productShopRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906200139414_shopUserRelation.cs" />
+    <Compile Include="Migrations\201906200139414_shopUserRelation.Designer.cs">
+      <DependentUpon>201906200139414_shopUserRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906200246489_orderTableRelations.cs" />
+    <Compile Include="Migrations\201906200246489_orderTableRelations.Designer.cs">
+      <DependentUpon>201906200246489_orderTableRelations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906200259122_createdOrderProductsTable.cs" />
+    <Compile Include="Migrations\201906200259122_createdOrderProductsTable.Designer.cs">
+      <DependentUpon>201906200259122_createdOrderProductsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906200303201_createdPackageTable.cs" />
+    <Compile Include="Migrations\201906200303201_createdPackageTable.Designer.cs">
+      <DependentUpon>201906200303201_createdPackageTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906200307291_ReviewRatingRelations.cs" />
+    <Compile Include="Migrations\201906200307291_ReviewRatingRelations.Designer.cs">
+      <DependentUpon>201906200307291_ReviewRatingRelations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906200326051_ShopAddressRelation.cs" />
+    <Compile Include="Migrations\201906200326051_ShopAddressRelation.Designer.cs">
+      <DependentUpon>201906200326051_ShopAddressRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\City.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\District.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderProduct.cs" />
+    <Compile Include="Models\Package.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ReviewRating.cs" />
+    <Compile Include="Models\ShipmentData.cs" />
+    <Compile Include="Models\Shop.cs" />
+    <Compile Include="Models\ShopVisit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -317,6 +439,86 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201906192115003_initialMigrationIdentity.resx">
+      <DependentUpon>201906192115003_initialMigrationIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906192132378_updatedUserTable.resx">
+      <DependentUpon>201906192132378_updatedUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906192202552_createdProductTable.resx">
+      <DependentUpon>201906192202552_createdProductTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906192218382_createdShopsTable.resx">
+      <DependentUpon>201906192218382_createdShopsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906192231264_createdOrdersTable.resx">
+      <DependentUpon>201906192231264_createdOrdersTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906192235596_createdCategoryTable.resx">
+      <DependentUpon>201906192235596_createdCategoryTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906192242291_createdCitiesTable.resx">
+      <DependentUpon>201906192242291_createdCitiesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906192244124_createdCountiesTable.resx">
+      <DependentUpon>201906192244124_createdCountiesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906192245574_createdDistrictTable.resx">
+      <DependentUpon>201906192245574_createdDistrictTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906192248028_createdReviewRatingTable.resx">
+      <DependentUpon>201906192248028_createdReviewRatingTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906192254388_updatedReviewRatingTable.resx">
+      <DependentUpon>201906192254388_updatedReviewRatingTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906192255529_changedAllTableNames.resx">
+      <DependentUpon>201906192255529_changedAllTableNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906192350568_createdCartTableRelations.resx">
+      <DependentUpon>201906192350568_createdCartTableRelations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906192358198_updatedCartTableRelations.resx">
+      <DependentUpon>201906192358198_updatedCartTableRelations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200004198_createdVisitsTable.resx">
+      <DependentUpon>201906200004198_createdVisitsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200012074_CountryCityDistrictRelations.resx">
+      <DependentUpon>201906200012074_CountryCityDistrictRelations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200023193_createdShipmentDataTable.resx">
+      <DependentUpon>201906200023193_createdShipmentDataTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200116376_productCategoryRelation.resx">
+      <DependentUpon>201906200116376_productCategoryRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200118062_dfgdfgdfg.resx">
+      <DependentUpon>201906200118062_dfgdfgdfg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200132485_productShopRelation.resx">
+      <DependentUpon>201906200132485_productShopRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200139414_shopUserRelation.resx">
+      <DependentUpon>201906200139414_shopUserRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200246489_orderTableRelations.resx">
+      <DependentUpon>201906200246489_orderTableRelations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200259122_createdOrderProductsTable.resx">
+      <DependentUpon>201906200259122_createdOrderProductsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200303201_createdPackageTable.resx">
+      <DependentUpon>201906200303201_createdPackageTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200307291_ReviewRatingRelations.resx">
+      <DependentUpon>201906200307291_ReviewRatingRelations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200326051_ShopAddressRelation.resx">
+      <DependentUpon>201906200326051_ShopAddressRelation.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
