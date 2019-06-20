@@ -19,5 +19,7 @@ namespace api.Models
         public string Variations { get; set; }
 
         public int Quantity { get; set; }
+
+        public Boolean IsDeleted { get; set; }
     }
 }

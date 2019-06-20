@@ -19,5 +19,7 @@ namespace api.Models
         public ApplicationUser User { get; set; }
         public List<OrderProduct> OrderProducts { get; set; }
         public List<Package> Packages { get; set; }
+
+        public Boolean IsDeleted { get; set; }
     }
 }

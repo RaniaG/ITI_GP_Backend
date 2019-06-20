@@ -30,6 +30,9 @@ namespace api.Models
         public List<ShipmentData> ShipmentDatas { get; set; }
         public List<Cart> Cart { get; set; }
         public List<Order> Orders { get; set; }
+        public List<Product> FavouriteProducts { get; set; }
+
+        public List<Shop> FollowedShops { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -68,6 +71,9 @@ namespace api.Models
 
         public DbSet<OrderProduct> OrderProducts { get; set; }
         public DbSet<Package> Packages { get; set; }
+
+        public DbSet<ShopDeliveryAddresses> ShopDeliveryAddresses { get; set; }
+
 
 
         public static ApplicationDbContext Create()
@@ -200,6 +206,11 @@ namespace api.Models
             package.HasRequired(p => p.Shop);
             package.HasKey(p => new {p.Id,p.OrderId,p.ShopId });
 
+            /*Shop Addresses Table*/
+            var shopaddresses = modelBuilder.Entity<ShopDeliveryAddresses>();
+            shopaddresses.Property(sa => sa.ShopId).HasMaxLength(128);
+            shopaddresses.HasKey(sa => new { sa.CityId, sa.CountryID, sa.DistrictId, sa.ShopId });
+
             /***************Relations*******************/
 
             //Country City Relation
@@ -243,6 +254,16 @@ namespace api.Models
             shops.HasRequired(sh => sh.Country);
             shops.HasRequired(sh => sh.District);
 
+
+            //follow shop relation
+            shops.HasMany(s => s.FollowedBy).WithMany(u => u.FollowedShops);
+
+
+
+
+
+            /***************************************************************/
+            
         }
     }
 }

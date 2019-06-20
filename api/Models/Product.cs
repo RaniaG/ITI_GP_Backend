@@ -38,5 +38,7 @@ namespace api.Models
         public List<OrderProduct> OrderProducts { get; set; }
 
         public List<ReviewRating> ReviewRatings { get; set; }
+
+        public List<ApplicationUser> FavouritedByUsers { get; set; }
     }
 }

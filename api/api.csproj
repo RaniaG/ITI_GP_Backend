@@ -358,6 +358,22 @@
     <Compile Include="Migrations\201906200326051_ShopAddressRelation.Designer.cs">
       <DependentUpon>201906200326051_ShopAddressRelation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906201402159_CreatedShopDeliveryAddressesTable.cs" />
+    <Compile Include="Migrations\201906201402159_CreatedShopDeliveryAddressesTable.Designer.cs">
+      <DependentUpon>201906201402159_CreatedShopDeliveryAddressesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906201419203_favouriteProductsRelation.cs" />
+    <Compile Include="Migrations\201906201419203_favouriteProductsRelation.Designer.cs">
+      <DependentUpon>201906201419203_favouriteProductsRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906201425231_createFollowShopRelation.cs" />
+    <Compile Include="Migrations\201906201425231_createFollowShopRelation.Designer.cs">
+      <DependentUpon>201906201425231_createFollowShopRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906201432513_addedIsDeletedToTables.cs" />
+    <Compile Include="Migrations\201906201432513_addedIsDeletedToTables.Designer.cs">
+      <DependentUpon>201906201432513_addedIsDeletedToTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -374,6 +390,7 @@
     <Compile Include="Models\ReviewRating.cs" />
     <Compile Include="Models\ShipmentData.cs" />
     <Compile Include="Models\Shop.cs" />
+    <Compile Include="Models\ShopDeliveryAddresses.cs" />
     <Compile Include="Models\ShopVisit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -529,6 +546,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906200326051_ShopAddressRelation.resx">
       <DependentUpon>201906200326051_ShopAddressRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200915327_NullGender.resx">
+      <DependentUpon>201906200915327_NullGender.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

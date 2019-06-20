@@ -16,7 +16,7 @@ namespace api.Models
         public string About { get; set; }
         public string Policy { get; set; }
         public int Subscription { get; set; }
-        public char IsDeleted { get; set; }
+        public Boolean IsDeleted { get; set; }
         public string PostalCode { get; set; }
         public string Street { get; set; }
         //Address
@@ -34,7 +34,7 @@ namespace api.Models
 
         public List<ReviewRating> ReviewRatings { get; set; }
 
-
+        public List<ApplicationUser> FollowedBy { get; set; }
 
     }
 }
