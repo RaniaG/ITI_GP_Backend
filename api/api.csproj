@@ -235,7 +235,18 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartsController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CitiesController.cs" />
+    <Compile Include="Controllers\CountriesController.cs" />
+    <Compile Include="Controllers\DistrictsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\PackagesController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ReviewRatingsController.cs" />
+    <Compile Include="Controllers\ShopsController.cs" />
+    <Compile Include="Controllers\ShopVisitsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Enums\OrderStatus.cs" />
@@ -346,6 +357,10 @@
     <Compile Include="Migrations\201906200326051_ShopAddressRelation.cs" />
     <Compile Include="Migrations\201906200326051_ShopAddressRelation.Designer.cs">
       <DependentUpon>201906200326051_ShopAddressRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906200915327_NullGender.cs" />
+    <Compile Include="Migrations\201906200915327_NullGender.Designer.cs">
+      <DependentUpon>201906200915327_NullGender.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -518,6 +533,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906200326051_ShopAddressRelation.resx">
       <DependentUpon>201906200326051_ShopAddressRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906200915327_NullGender.resx">
+      <DependentUpon>201906200915327_NullGender.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -23,7 +23,7 @@ namespace api.Models
         public string CoverPhoto { get; set; }
 
         public string Biography { get; set; }
-        public Gender Gender { get; set; }
+        public Gender? Gender { get; set; }
 
         //public virtual Shop Shop { get; set; }
 
