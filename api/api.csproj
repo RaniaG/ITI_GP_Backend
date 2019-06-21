@@ -547,6 +547,18 @@
     <EmbeddedResource Include="Migrations\201906200326051_ShopAddressRelation.resx">
       <DependentUpon>201906200326051_ShopAddressRelation.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906201402159_CreatedShopDeliveryAddressesTable.resx">
+      <DependentUpon>201906201402159_CreatedShopDeliveryAddressesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906201419203_favouriteProductsRelation.resx">
+      <DependentUpon>201906201419203_favouriteProductsRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906201425231_createFollowShopRelation.resx">
+      <DependentUpon>201906201425231_createFollowShopRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906201432513_addedIsDeletedToTables.resx">
+      <DependentUpon>201906201432513_addedIsDeletedToTables.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
