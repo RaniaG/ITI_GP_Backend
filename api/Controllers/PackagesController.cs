@@ -8,9 +8,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using api.Models;
+using API.Models;
 
-namespace api.Controllers
+namespace API.Controllers
 {
     public class PackagesController : ApiController
     {
@@ -80,22 +80,7 @@ namespace api.Controllers
             }
 
             db.Packages.Add(package);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (PackageExists(package.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = package.Id }, package);
         }

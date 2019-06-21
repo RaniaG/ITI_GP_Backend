@@ -8,9 +8,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using api.Models;
+using API.Models;
 
-namespace api.Controllers
+namespace API.Controllers
 {
     public class CategoriesController : ApiController
     {

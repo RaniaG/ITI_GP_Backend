@@ -4,9 +4,9 @@ using System.Linq;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(api.Startup))]
+[assembly: OwinStartup(typeof(API.Startup))]
 
-namespace api
+namespace API
 {
     public partial class Startup
     {

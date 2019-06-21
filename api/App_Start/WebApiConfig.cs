@@ -7,8 +7,7 @@ using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http.Formatting;
 using Newtonsoft.Json;
-
-namespace api
+namespace API
 {
     public static class WebApiConfig
     {

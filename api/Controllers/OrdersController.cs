@@ -8,9 +8,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using api.Models;
+using API.Models;
 
-namespace api.Controllers
+namespace API.Controllers
 {
     public class OrdersController : ApiController
     {
@@ -80,22 +80,7 @@ namespace api.Controllers
             }
 
             db.Orders.Add(order);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (OrderExists(order.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = order.Id }, order);
         }

@@ -8,9 +8,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using api.Models;
+using API.Models;
 
-namespace api.Controllers
+namespace API.Controllers
 {
     public class ShopsController : ApiController
     {
@@ -44,7 +44,7 @@ namespace api.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != shop.UserId)
+            if (id != shop.Id)
             {
                 return BadRequest();
             }
@@ -87,7 +87,7 @@ namespace api.Controllers
             }
             catch (DbUpdateException)
             {
-                if (ShopExists(shop.UserId))
+                if (ShopExists(shop.Id))
                 {
                     return Conflict();
                 }
@@ -97,7 +97,7 @@ namespace api.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = shop.UserId }, shop);
+            return CreatedAtRoute("DefaultApi", new { id = shop.Id }, shop);
         }
 
         // DELETE: api/Shops/5
@@ -127,7 +127,7 @@ namespace api.Controllers
 
         private bool ShopExists(string id)
         {
-            return db.Shops.Count(e => e.UserId == id) > 0;
+            return db.Shops.Count(e => e.Id == id) > 0;
         }
     }
 }
