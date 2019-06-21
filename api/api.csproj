@@ -547,9 +547,6 @@
     <EmbeddedResource Include="Migrations\201906200326051_ShopAddressRelation.resx">
       <DependentUpon>201906200326051_ShopAddressRelation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906200915327_NullGender.resx">
-      <DependentUpon>201906200915327_NullGender.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
