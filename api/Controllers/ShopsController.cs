@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using API.DTOs;
 using API.Models;
 
 namespace API.Controllers
@@ -17,13 +18,16 @@ namespace API.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Shops
-        public IQueryable<Shop> GetShops()
+        
+        public IQueryable<Shop> GetShops(int PageNumber)
         {
+
             return db.Shops;
         }
 
         // GET: api/Shops/5
         [ResponseType(typeof(Shop))]
+        
         public IHttpActionResult GetShop(string id)
         {
             Shop shop = db.Shops.Find(id);
@@ -72,12 +76,21 @@ namespace API.Controllers
 
         // POST: api/Shops
         [ResponseType(typeof(Shop))]
+        [Authorize]
         public IHttpActionResult PostShop(Shop shop)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+            
+            string email=RequestContext.Principal.Identity.Name;
+            ApplicationUser user=db.Users.FirstOrDefault(u => u.Email == email);
+            shop.User = user;
+            shop.Id = user.Id;
+            shop.Country = db.Countries.FirstOrDefault(c => c.Id == shop.CountryId);
+            shop.City = db.Cities.FirstOrDefault(c => c.Id == shop.CityId);
+            shop.District = db.Districts.FirstOrDefault(c => c.Id == shop.DistrictId);
 
             db.Shops.Add(shop);
 
@@ -97,7 +110,7 @@ namespace API.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = shop.Id }, shop);
+            return CreatedAtRoute("DefaultApi", new { id = shop.Id }, new ShopDTO( shop));
         }
 
         // DELETE: api/Shops/5

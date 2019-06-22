@@ -226,6 +226,8 @@
     <Compile Include="Controllers\ShopsController.cs" />
     <Compile Include="Controllers\ShopVisitsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DTOs\ApplicationUserDTO.cs" />
+    <Compile Include="DTOs\ShopDTO.cs" />
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
