@@ -23,7 +23,10 @@ namespace API.DTOs
         public string Policy { get; set; }
         public string Street { get; set; }
         public ApplicationUserDTO User { get; set; }
+        public ShopDTO()
+        {
 
+        }
         public ShopDTO(Shop shop)
         {
             Id=shop.Id;

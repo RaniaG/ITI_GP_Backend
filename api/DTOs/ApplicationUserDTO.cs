@@ -15,6 +15,10 @@ namespace API.DTOs
         public string UserName { get; set; }
         public string Photo { get; set; }
         public string Cover { get; set; }
+        public ApplicationUserDTO()
+        {
+
+        }
         public ApplicationUserDTO(ApplicationUser User)
         {
             Id = User.Id;
