@@ -245,6 +245,20 @@ namespace API.Controllers
         {
             return db.Shops.Count(e => e.Id == id) > 0;
         }
+        private bool ValidateShop(Shop shop)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                if (ModelState.Count == 1 && ModelState["shop.User"] != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+            else return true;
+
+        }
 
         //[Route("api/shop/GetSubscriptionType")]
         public IHttpActionResult GetSubscriptionType([FromUri] string id)
