@@ -14,12 +14,7 @@ namespace API.Controllers
         {
             ViewBag.Title = "Home Page";
 
-            IdentityRole user = new IdentityRole("user");
-            IdentityRole seller = new IdentityRole("seller");
-
-            //var u = await RoleManager.CreateAsync(user);
-            //var s = await RoleManager.CreateAsync(seller);
-
+       
             return View();
         }
     }

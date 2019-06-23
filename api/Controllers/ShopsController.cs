@@ -13,12 +13,39 @@ using api.Enums;
 using API.DTOs;
 using API.Models;
 using JsonPatch;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace API.Controllers
 {
     public class ShopsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return Request.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return Request.GetOwinContext().Get<ApplicationUserManager>();
+            }
+        }
+        private async void assignRole(string shopId)
+        {
+
+            IdentityRole seller = new IdentityRole("seller");
+
+            /*
+               var s = await RoleManager.CreateAsync(seller);
+            */
+            await UserManager.AddToRoleAsync(shopId, seller.Name);
+        }
 
         // GET: api/Shops/1
         [Route("api/Shops/{PageNumber}")]
@@ -94,6 +121,16 @@ namespace API.Controllers
             }
             return Ok(new ShopDTO(shop));
         }
+        // GET: api/FollowedShop
+        [ResponseType(typeof(Shop))]
+        [Route("api/FollowedShop")]
+        [Authorize]
+        public List<Shop>  GetFollowedShop()
+        {
+            string email = RequestContext.Principal.Identity.Name;
+            ApplicationUser user = db.Users.FirstOrDefault(u => u.Email == email);
+            return user.FollowedShops.ToList();    
+        }
 
         // PUT: api/Shops
         [ResponseType(typeof(void))]
@@ -160,6 +197,7 @@ namespace API.Controllers
             shop.Rating = 0;
             shop.IsDeleted = false;
             db.Shops.Add(shop);
+            assignRole(shop.Id);
             try
             {
                 db.SaveChanges();
@@ -217,13 +255,12 @@ namespace API.Controllers
         {
             return db.Shops.Count(e => e.Id == id) > 0;
         }
-
         private bool ValidateShop(Shop shop)
         {
 
             if (!ModelState.IsValid)
             {
-                if(ModelState.Count==1&&ModelState["shop.User"]!=null)
+                if (ModelState.Count == 1 && ModelState["shop.User"] != null)
                 {
                     return true;
                 }
@@ -233,7 +270,29 @@ namespace API.Controllers
 
         }
 
-       
-        
+        //[Route("api/shop/GetSubscriptionType")]
+        public IHttpActionResult GetSubscriptionType([FromUri] string id)
+        {
+            Shop shop = db.Shops.Find(id);
+            if (shop == null)
+            {
+                return NotFound();
+            }
+            var subscription = new { subscriptionType = shop.Subscription == 0 ? "free" : "premium" };
+            return Ok(subscription);
+        }
+        public IHttpActionResult GetShopInventoryInfo([FromUri] string id)
+        {
+            Shop shop = db.Shops.Find(id);
+           
+            if (shop == null)
+            {
+                return NotFound();
+            }
+            int usedSlots =shop.Products!=null?shop.Products.Count(p=>!p.IsDeleted):0;
+            var InventoryInfo = new { maxSlots = shop.Subscription == 0 ? 50 : 100, usedSlots = usedSlots };
+            return Ok(InventoryInfo);
+        }
+
     }
 }
