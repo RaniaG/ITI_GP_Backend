@@ -121,6 +121,16 @@ namespace API.Controllers
             }
             return Ok(new ShopDTO(shop));
         }
+        // GET: api/FollowedShop
+        [ResponseType(typeof(Shop))]
+        [Route("api/FollowedShop")]
+        [Authorize]
+        public List<Shop>  GetFollowedShop()
+        {
+            string email = RequestContext.Principal.Identity.Name;
+            ApplicationUser user = db.Users.FirstOrDefault(u => u.Email == email);
+            return user.FollowedShops.ToList();    
+        }
 
         // PUT: api/Shops
         [ResponseType(typeof(void))]

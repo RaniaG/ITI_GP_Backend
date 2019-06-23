@@ -21,7 +21,16 @@ namespace API.Controllers
         {
             return db.Products;
         }
-
+        // GET: api/FavoriteItems
+        [ResponseType(typeof(Product))]
+        [Route("api/FavoriteItems")]
+        [Authorize]
+        public List<Product> GetFavoriteItems()
+        {
+            string email = RequestContext.Principal.Identity.Name;
+            ApplicationUser user = db.Users.FirstOrDefault(u => u.Email == email);
+            return user.FavouriteProducts.ToList();
+        }
         // GET: api/Products/5
         [ResponseType(typeof(Product))]
         public IHttpActionResult GetProduct(int id)

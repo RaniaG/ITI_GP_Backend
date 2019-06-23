@@ -35,6 +35,15 @@ namespace API.Controllers
             return Ok(district);
         }
 
+        //Get Districts By City Id
+        [Route("api/city/country/{id}")]
+        [HttpGet]
+        public IQueryable<District> GetCityDistricts(int id)
+        {
+            IQueryable<District> districts = db.Districts.Where(d => d.CityId == id);
+            return districts;
+        }
+
         // PUT: api/Districts/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutDistrict(int id, District district)
