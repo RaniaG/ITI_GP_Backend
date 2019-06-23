@@ -25,6 +25,7 @@ namespace API.Controllers
         }
 
         // GET: api/Carts
+        [Authorize]
         public IQueryable<Cart> GetCarts()
         {
             IQueryable<Cart> carts = db.Carts.Where(c => c.UserId == getUserId());
@@ -33,6 +34,7 @@ namespace API.Controllers
 
         // GET: api/Carts/5
         [ResponseType(typeof(Cart))]
+        [Authorize]
         public IHttpActionResult GetCart(int id)
         {
             Cart cart = db.Carts.Find(id);
@@ -51,6 +53,7 @@ namespace API.Controllers
 
         // PUT: api/Carts/5
         [ResponseType(typeof(void))]
+        [Authorize]
         public IHttpActionResult PutCart(int id, Cart cart)
         {
             if (!ModelState.IsValid)
@@ -71,7 +74,7 @@ namespace API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CartExists(id))
+                if (!CartExists(id) || cart.IsDeleted)
                 {
                     return NotFound();
                 }
@@ -86,12 +89,11 @@ namespace API.Controllers
 
         // POST: api/Carts
         [ResponseType(typeof(Cart))]
+        [Authorize]
         public IHttpActionResult PostCart(Cart cart)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            cart.UserId = getUserId();
+            cart.IsDeleted = false;
 
             db.Carts.Add(cart);
 
@@ -118,13 +120,14 @@ namespace API.Controllers
         [ResponseType(typeof(Cart))]
         public IHttpActionResult DeleteCart(int id)
         {
-            Cart cart = db.Carts.Find(id);
+            Cart cart = db.Carts.Where(c => c.ProductId == id && c.UserId == getUserId()).First();
             if (cart == null)
             {
                 return NotFound();
             }
 
-            db.Carts.Remove(cart);
+            cart.IsDeleted = true;
+            db.Entry(cart).State = EntityState.Modified;
             db.SaveChanges();
 
             return Ok(cart);
