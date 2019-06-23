@@ -129,5 +129,30 @@ namespace API.Controllers
         {
             return db.Shops.Count(e => e.Id == id) > 0;
         }
+
+        //[Route("api/shop/GetSubscriptionType")]
+        public IHttpActionResult GetSubscriptionType([FromUri] string id)
+        {
+            Shop shop = db.Shops.Find(id);
+            if (shop == null)
+            {
+                return NotFound();
+            }
+            var subscription = new { subscriptionType = shop.Subscription == 0 ? "free" : "premium" };
+            return Ok(subscription);
+        }
+        public IHttpActionResult GetShopInventoryInfo([FromUri] string id)
+        {
+            Shop shop = db.Shops.Find(id);
+           
+            if (shop == null)
+            {
+                return NotFound();
+            }
+            int usedSlots =shop.Products!=null?shop.Products.Count(p=>!p.IsDeleted):0;
+            var InventoryInfo = new { maxSlots = shop.Subscription == 0 ? 50 : 100, usedSlots = usedSlots };
+            return Ok(InventoryInfo);
+        }
+
     }
 }

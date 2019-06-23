@@ -31,6 +31,7 @@ namespace API
                 .ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             // Web API routes
+            //allowing routes as attribute
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
