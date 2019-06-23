@@ -25,6 +25,7 @@ namespace API.Controllers
         }
 
         // GET: api/Carts
+        [Authorize]
         public IQueryable<Cart> GetCarts()
         {
             IQueryable<Cart> carts = db.Carts.Where(c => c.UserId == getUserId());
@@ -33,6 +34,7 @@ namespace API.Controllers
 
         // GET: api/Carts/5
         [ResponseType(typeof(Cart))]
+        [Authorize]
         public IHttpActionResult GetCart(int id)
         {
             Cart cart = db.Carts.Find(id);
@@ -51,6 +53,7 @@ namespace API.Controllers
 
         // PUT: api/Carts/5
         [ResponseType(typeof(void))]
+        [Authorize]
         public IHttpActionResult PutCart(int id, Cart cart)
         {
             if (!ModelState.IsValid)
@@ -86,6 +89,7 @@ namespace API.Controllers
 
         // POST: api/Carts
         [ResponseType(typeof(Cart))]
+        [Authorize]
         public IHttpActionResult PostCart(Cart cart)
         {
             cart.UserId = getUserId();
