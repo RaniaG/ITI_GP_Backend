@@ -17,8 +17,8 @@ namespace API.Controllers
             IdentityRole user = new IdentityRole("user");
             IdentityRole seller = new IdentityRole("seller");
 
-            var u = await RoleManager.CreateAsync(user);
-            var s = await RoleManager.CreateAsync(seller);
+            //var u = await RoleManager.CreateAsync(user);
+            //var s = await RoleManager.CreateAsync(seller);
 
             return View();
         }
