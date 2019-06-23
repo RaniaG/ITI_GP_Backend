@@ -16,10 +16,19 @@ namespace API.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        private string getUserId()
+        {
+            string email = RequestContext.Principal.Identity.Name;
+            ApplicationUser user = db.Users.FirstOrDefault(u => u.Email == email);
+            return user.Id;
+
+        }
+
         // GET: api/Carts
         public IQueryable<Cart> GetCarts()
         {
-            return db.Carts;
+            IQueryable<Cart> carts = db.Carts.Where(c => c.UserId == getUserId());
+            return carts;
         }
 
         // GET: api/Carts/5
@@ -31,9 +40,14 @@ namespace API.Controllers
             {
                 return NotFound();
             }
+            if(cart.UserId != getUserId())
+            {
+                return BadRequest();
+            }
 
             return Ok(cart);
         }
+
 
         // PUT: api/Carts/5
         [ResponseType(typeof(void))]
@@ -44,7 +58,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != cart.ProductId)
+            if (id != cart.ProductId || getUserId() != cart.UserId)
             {
                 return BadRequest();
             }
