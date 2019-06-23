@@ -268,8 +268,8 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var subscription = new { subscriptionType = shop.Subscription == 0 ? "free" : "premium" };
-            return Ok(subscription);
+            string subscriptionType = shop.Subscription == 0 ? "free" : "premium";
+            return Ok(subscriptionType);
         }
         public IHttpActionResult GetShopInventoryInfo([FromUri] string id)
         {
