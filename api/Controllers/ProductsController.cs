@@ -8,7 +8,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using api.Enums;
 using API.DTOs;
+using API.Enums;
 using API.Helpers;
 using API.Models;
 
@@ -81,15 +83,15 @@ namespace API.Controllers
             return resDTO;
         }
 
-        // GET: api/FavoriteItems
-        //[ResponseType(typeof(Product))]
-        //[Route("api/FavoriteItems")]
-        //[Authorize]
-        //public List<Product> GetFavoriteItems()
-        //{
-        //    ApplicationUser user = Helper.GetUser(RequestContext, db);
-        //    //return user.FavouriteProducts.ToList();
-        //}
+        //GET: api/FavoriteItems
+       [ResponseType(typeof(Product))]
+       [Route("api/FavoriteItems")]
+       [Authorize]
+        public List<Product> GetFavoriteItems()
+        {
+            ApplicationUser user = Helper.GetUser(RequestContext, db);
+            return user.FavouriteProducts.ToList();
+        }
 
         // GET: api/Products/5
         [ResponseType(typeof(ProductDTO))]
@@ -166,7 +168,8 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
             ApplicationUser user = Helper.GetUser(RequestContext,db);
-            if (db.Shops.Find(user.Id) == null) //user is trying to add product without creating shop
+            Shop shop = db.Shops.Find(user.Id);
+            if (shop == null) //user is trying to add product without creating shop
                 return Unauthorized();
             Product product = new Product()
             {
@@ -180,9 +183,21 @@ namespace API.Controllers
                 CategoryId = productDTO.CategoryId,
                 Category = db.Categories.Find(productDTO.CategoryId),
                 Shop = db.Shops.Find(user.Id),
-                PublishTime=DateTime.Now,
-                //LifeTime=
+                PublishTime=productDTO.PublishTime==null?DateTime.Now:(DateTime)productDTO.PublishTime
+                
             };
+            switch (shop.Subscription)
+            {
+                case SubscriptionType.Premium:
+                    product.LifeTime = (int)ProductSubscriptionLifeTime.Premium;
+                    break;
+                case SubscriptionType.Gold:
+                    product.LifeTime = (int)ProductSubscriptionLifeTime.Gold;
+                    break;
+                default:
+                    product.LifeTime = (int)ProductSubscriptionLifeTime.Free;
+                    break;
+            }
             db.Products.Add(product);
             db.SaveChanges();
 

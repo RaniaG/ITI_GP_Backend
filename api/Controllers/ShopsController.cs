@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using api.Enums;
 using API.DTOs;
+using API.Enums;
 using API.Helpers;
 using API.Models;
 using JsonPatch;
@@ -122,16 +123,16 @@ namespace API.Controllers
             }
             return Ok(new ShopDTO(shop));
         }
-        // GET: api/FollowedShop
-        //[ResponseType(typeof(Shop))]
-        //[Route("api/FollowedShop")]
-        //[Authorize]
-        //public List<Shop>  GetFollowedShop()
-        //{
-        //    string email = RequestContext.Principal.Identity.Name;
-        //    ApplicationUser user = db.Users.FirstOrDefault(u => u.Email == email);
-        //    return user.FollowedShops.ToList();    
-        //}
+        //GET: api/FollowedShop
+       [ResponseType(typeof(Shop))]
+       [Route("api/FollowedShop")]
+       [Authorize]
+        public List<Shop> GetFollowedShop()
+        {
+            string email = RequestContext.Principal.Identity.Name;
+            ApplicationUser user = db.Users.FirstOrDefault(u => u.Email == email);
+            return user.FollowedShops.ToList();
+        }
 
         // PUT: api/Shops
         [ResponseType(typeof(void))]
@@ -153,6 +154,10 @@ namespace API.Controllers
             shop.IsDeleted = s.IsDeleted;
             shop.Rating = s.Rating;
             shop.User = s.User;
+            shop.Subscription = s.Subscription;
+
+            
+
             //s = shop;
             //db.Shops.Attach(shop);
             //db.Entry(shop).State = EntityState.Added;
@@ -177,6 +182,36 @@ namespace API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+
+        //POST: api/Shop/Subscription/{sub}
+        [ResponseType(typeof(Shop))]
+        [Authorize]
+        [HttpPost]
+        public IHttpActionResult UpdateShopSubscription(int sub)
+        {
+            ApplicationUser user = Helper.GetUser(RequestContext, db);
+            Shop shop = db.Shops.Find(user.Id);
+            if (shop== null)//user has shop
+                return NotFound();
+            if (sub < 0 || sub > 2)
+                return BadRequest();
+
+            IQueryable<Product> products= db.Products.Where(el => el.ShopID == shop.Id);
+            switch ((SubscriptionType)sub)
+            {
+                case SubscriptionType.Premium:
+                    products.ForEachAsync(el => el.LifeTime = (int)ProductSubscriptionLifeTime.Premium);
+                    break;
+                case SubscriptionType.Gold:
+                    products.ForEachAsync(el => el.LifeTime = (int)ProductSubscriptionLifeTime.Gold);
+                    break;
+                case SubscriptionType.Free:
+                    products.ForEachAsync(el => el.LifeTime = (int)ProductSubscriptionLifeTime.Free);
+                    break;
+            }
+                return Ok();
+        }
+
         // POST: api/Shops
         [ResponseType(typeof(Shop))]
         [Authorize]
@@ -194,6 +229,8 @@ namespace API.Controllers
             shop.District = db.Districts.FirstOrDefault(c => c.Id == shop.DistrictId);
             shop.Rating = 0;
             shop.IsDeleted = false;
+
+
             db.Shops.Add(shop);
             assignRole(shop.Id);
             try
