@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace api.Enums
+namespace API.Enums
 {
-    public enum SubscriptionType
+    public enum ProductSubscriptionLifeTime
     {
-        Free,Premium,Gold
+        Free=15,Premium=45,Gold=100
     }
 }

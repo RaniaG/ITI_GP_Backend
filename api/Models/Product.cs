@@ -51,5 +51,12 @@ namespace API.Models
 
         public List<ApplicationUser> FavouritedByUsers { get; set; }
         public List<Cart> AddedToCarts { get; set; }
+        public Product()
+        {
+            AddedToCarts = new List<Cart>();
+            FavouritedByUsers = new List<ApplicationUser>();
+            ReviewRatings = new List<ReviewRating>();
+            OrderProducts = new List<OrderProduct>();
+        }
     }
 }

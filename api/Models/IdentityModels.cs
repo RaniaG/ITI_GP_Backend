@@ -43,6 +43,15 @@ namespace API.Models
         
         public Shop Shop { get; set; }
         public List<ReviewRating> ReviewedProducts { get; set; }
+        public ApplicationUser()
+        {
+            ReviewedProducts = new List<ReviewRating>();
+            FollowedShops = new List<Shop>();
+            Orders = new List<Order>();
+            FavouriteProducts = new List<Product>();
+            Cart = new List<Cart>();
+            ShipmentDatas = new List<ShipmentData>();
+        }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using api.Enums;
 using API.DTOs;
+using API.Helpers;
 using API.Models;
 using JsonPatch;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -138,8 +139,7 @@ namespace API.Controllers
         [Authorize]
         public IHttpActionResult PutShop(Shop shop)
         {
-            string email = RequestContext.Principal.Identity.Name;
-            ApplicationUser user = db.Users.FirstOrDefault(u => u.Email == email);
+            ApplicationUser user = Helper.GetUser(RequestContext, db);
             string id = user.Id;
 
             if (shop.Id != id)
@@ -186,9 +186,7 @@ namespace API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
-            string email=RequestContext.Principal.Identity.Name;
-            ApplicationUser user=db.Users.FirstOrDefault(u => u.Email == email);
+            ApplicationUser user = Helper.GetUser(RequestContext, db);
             shop.User = user;
             shop.Id = user.Id;
             shop.Country = db.Countries.FirstOrDefault(c => c.Id == shop.CountryId);
@@ -222,9 +220,8 @@ namespace API.Controllers
         [Authorize]
         public IHttpActionResult DeleteShop()
         {
-            string email = RequestContext.Principal.Identity.Name;
-            ApplicationUser user = db.Users.FirstOrDefault(u => u.Email == email);
-            
+            ApplicationUser user = Helper.GetUser(RequestContext, db);
+
             Shop shop = db.Shops.Find(user.Id);
             if (shop == null)
             {
@@ -240,8 +237,25 @@ namespace API.Controllers
 
 
         /* change photo and cover */
+        [Route("api/Shop/Follow/{id}")]
+        [Authorize]
+        [HttpPost]
+        public IHttpActionResult FollowShop(string id)
+        {
+            ApplicationUser user = Helper.GetUser(RequestContext, db);
 
-        
+            Shop shop = db.Shops.Find(id);
+            if (shop != null)
+            {
+                shop.FollowedBy.Add(user);
+                user.FollowedShops.Add(shop);
+                db.SaveChanges();
+            }
+            else return NotFound();
+
+            return Ok();
+
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
