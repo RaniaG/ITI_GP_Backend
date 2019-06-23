@@ -82,14 +82,14 @@ namespace API.Controllers
         }
 
         // GET: api/FavoriteItems
-        [ResponseType(typeof(Product))]
-        [Route("api/FavoriteItems")]
-        [Authorize]
-        public List<Product> GetFavoriteItems()
-        {
-            ApplicationUser user = Helper.GetUser(RequestContext, db);
-            return user.FavouriteProducts.ToList();
-        }
+        //[ResponseType(typeof(Product))]
+        //[Route("api/FavoriteItems")]
+        //[Authorize]
+        //public List<Product> GetFavoriteItems()
+        //{
+        //    ApplicationUser user = Helper.GetUser(RequestContext, db);
+        //    //return user.FavouriteProducts.ToList();
+        //}
 
         // GET: api/Products/5
         [ResponseType(typeof(ProductDTO))]

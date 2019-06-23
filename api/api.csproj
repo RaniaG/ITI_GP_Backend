@@ -253,6 +253,22 @@
     <Compile Include="Migrations\201906212035357_updateUserShopRelation.Designer.cs">
       <DependentUpon>201906212035357_updateUserShopRelation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906232006177_DropFavouriteProductRelation.cs" />
+    <Compile Include="Migrations\201906232006177_DropFavouriteProductRelation.Designer.cs">
+      <DependentUpon>201906232006177_DropFavouriteProductRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906232009565_RecreatedFavouriteProductTable.cs" />
+    <Compile Include="Migrations\201906232009565_RecreatedFavouriteProductTable.Designer.cs">
+      <DependentUpon>201906232009565_RecreatedFavouriteProductTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906232034162_removedFollowShopRelation.cs" />
+    <Compile Include="Migrations\201906232034162_removedFollowShopRelation.Designer.cs">
+      <DependentUpon>201906232034162_removedFollowShopRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906232037173_createdFollowShopRelation.cs" />
+    <Compile Include="Migrations\201906232037173_createdFollowShopRelation.Designer.cs">
+      <DependentUpon>201906232037173_createdFollowShopRelation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -379,6 +395,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906212035357_updateUserShopRelation.resx">
       <DependentUpon>201906212035357_updateUserShopRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906232006177_DropFavouriteProductRelation.resx">
+      <DependentUpon>201906232006177_DropFavouriteProductRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906232009565_RecreatedFavouriteProductTable.resx">
+      <DependentUpon>201906232009565_RecreatedFavouriteProductTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906232034162_removedFollowShopRelation.resx">
+      <DependentUpon>201906232034162_removedFollowShopRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906232037173_createdFollowShopRelation.resx">
+      <DependentUpon>201906232037173_createdFollowShopRelation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
