@@ -14,25 +14,30 @@ namespace API.Controllers
 {
     public class PackagesController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext dbCtx = new ApplicationDbContext();
 
         // GET: api/Packages
         public IQueryable<Package> GetPackages()
         {
-            return db.Packages;
+            return dbCtx.Packages;
         }
 
-        // GET: api/Packages/5
+        // GET: api/packages/5?shopId=
         [ResponseType(typeof(Package))]
-        public IHttpActionResult GetPackage(int id)
+        public IHttpActionResult GetPackageDetails(int id,string shopId)
         {
-            Package package = db.Packages.Find(id);
+            Package package = dbCtx.Packages.Find(id);
             if (package == null)
             {
                 return NotFound();
             }
-
+            else
+            {
+                //get package poco
             return Ok(package);
+
+            }
+
         }
 
         // PUT: api/Packages/5
@@ -49,11 +54,11 @@ namespace API.Controllers
                 return BadRequest();
             }
 
-            db.Entry(package).State = EntityState.Modified;
+            dbCtx.Entry(package).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                dbCtx.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -79,8 +84,8 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Packages.Add(package);
-            db.SaveChanges();
+            dbCtx.Packages.Add(package);
+            dbCtx.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = package.Id }, package);
         }
@@ -89,14 +94,14 @@ namespace API.Controllers
         [ResponseType(typeof(Package))]
         public IHttpActionResult DeletePackage(int id)
         {
-            Package package = db.Packages.Find(id);
+            Package package = dbCtx.Packages.Find(id);
             if (package == null)
             {
                 return NotFound();
             }
 
-            db.Packages.Remove(package);
-            db.SaveChanges();
+            dbCtx.Packages.Remove(package);
+            dbCtx.SaveChanges();
 
             return Ok(package);
         }
@@ -105,14 +110,14 @@ namespace API.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                dbCtx.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool PackageExists(int id)
         {
-            return db.Packages.Count(e => e.Id == id) > 0;
+            return dbCtx.Packages.Count(e => e.Id == id) > 0;
         }
     }
 }

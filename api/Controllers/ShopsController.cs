@@ -121,7 +121,7 @@ namespace API.Controllers
             }
             return Ok(new ShopDTO(shop));
         }
-        // GET: api/FollowedShop/5
+        // GET: api/FollowedShop
         [ResponseType(typeof(Shop))]
         [Route("api/FollowedShop")]
         [Authorize]
@@ -255,13 +255,12 @@ namespace API.Controllers
         {
             return db.Shops.Count(e => e.Id == id) > 0;
         }
-
         private bool ValidateShop(Shop shop)
         {
 
             if (!ModelState.IsValid)
             {
-                if(ModelState.Count==1&&ModelState["shop.User"]!=null)
+                if (ModelState.Count == 1 && ModelState["shop.User"] != null)
                 {
                     return true;
                 }
@@ -271,7 +270,29 @@ namespace API.Controllers
 
         }
 
-       
-        
+        //[Route("api/shop/GetSubscriptionType")]
+        public IHttpActionResult GetSubscriptionType([FromUri] string id)
+        {
+            Shop shop = db.Shops.Find(id);
+            if (shop == null)
+            {
+                return NotFound();
+            }
+            var subscription = new { subscriptionType = shop.Subscription == 0 ? "free" : "premium" };
+            return Ok(subscription);
+        }
+        public IHttpActionResult GetShopInventoryInfo([FromUri] string id)
+        {
+            Shop shop = db.Shops.Find(id);
+           
+            if (shop == null)
+            {
+                return NotFound();
+            }
+            int usedSlots =shop.Products!=null?shop.Products.Count(p=>!p.IsDeleted):0;
+            var InventoryInfo = new { maxSlots = shop.Subscription == 0 ? 50 : 100, usedSlots = usedSlots };
+            return Ok(InventoryInfo);
+        }
+
     }
 }
