@@ -107,7 +107,40 @@ namespace API.Controllers
             return Ok(ProductDTO.ToDTO(product));
         }
 
+
+        [Route("api/Product/Related/{id}")]
         
+        public IQueryable<ProductDTO> GetRelatedProducts(int id)
+        {
+            Product p = db.Products.Find(id);
+            //if (p == null)
+            //    return NotFound();
+
+            //products that have the same category
+            IQueryable<Product> products = db.Products.Where(el => el.CategoryId == p.CategoryId)
+                .OrderBy(el=>Guid.NewGuid()).Take(4);
+            IQueryable<ProductDTO> resDTO = products.Select(el => new ProductDTO()
+            {
+                Id = el.Id,
+                Name = el.Name,
+                Price = el.Price,
+                Discount = el.Discount,
+                Quantity = el.Quantity,
+                Terms = el.Terms,
+                Variations = el.Variations,
+                Rating = el.Rating,
+                Images = el.Images,
+                Approved = el.Approved,
+                Active = el.Active,
+                PublishTime = el.PublishTime,
+                LifeTime = el.LifeTime,
+                CategoryId = el.CategoryId,
+                Shop = el.ShopID
+            });
+            return resDTO;
+        }
+
+
         // PUT: api/Products/5
         [ResponseType(typeof(void))]
         [Authorize]

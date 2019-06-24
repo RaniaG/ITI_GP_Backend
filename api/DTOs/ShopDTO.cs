@@ -12,10 +12,10 @@ namespace API.DTOs
         public string Name { get; set; }
         public double Rating { get; set; }
 
-        public int City { get; set; }
+        public int CityId { get; set; }
 
-        public int Country { get; set; }
-        public int District { get; set; }
+        public int CountryId { get; set; }
+        public int DistrictId { get; set; }
 
         public string Photo { get; set; }
         public string Cover { get; set; }
@@ -32,9 +32,9 @@ namespace API.DTOs
             Id=shop.Id;
             Name = shop.Name;
             Rating = shop.Rating;
-            City = shop.CityId;
-            Country = shop.CountryId;
-            District = shop.DistrictId;
+            CityId = shop.CityId;
+            CountryId = shop.CountryId;
+            DistrictId = shop.DistrictId;
             About = shop.About;
             Policy = shop.Policy;
             Street = shop.Street;
@@ -47,9 +47,9 @@ namespace API.DTOs
                 Id = shopDto.Id,
                 Name = shopDto.Name,
                 Rating = shopDto.Rating,
-                CityId = shopDto.City,
-                CountryId = shopDto.Country,
-                DistrictId = shopDto.District,
+                CityId = shopDto.CityId,
+                CountryId = shopDto.CountryId,
+                DistrictId = shopDto.DistrictId,
                 Street = shopDto.Street,
                 About = shopDto.About,
                 Policy = shopDto.Policy
@@ -63,9 +63,9 @@ namespace API.DTOs
                 Id = shop.Id,
                 Name = shop.Name,
                 Rating = shop.Rating,
-                City = shop.CityId,
-                Country = shop.CountryId,
-                District = shop.DistrictId,
+                CityId = shop.CityId,
+                CountryId = shop.CountryId,
+                DistrictId = shop.DistrictId,
                 About = shop.About,
                 Policy = shop.Policy,
                 Street = shop.Street,
