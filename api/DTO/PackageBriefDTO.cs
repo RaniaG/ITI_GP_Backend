@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using API.Models;
+using api.Enums;
 namespace API.DTO
 {
     public class PackageBriefDTO
     {
+        public int PackageId { get; set; }
+        public DateTime DeliveryTime { get; set; }
+        public OrderStatus PackageStatus { get; set; }
+        public ShipmentData ShippingData { get; set; }
+        public double TotalCharge { get; set; }
     }
 }

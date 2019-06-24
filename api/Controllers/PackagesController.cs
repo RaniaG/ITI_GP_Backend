@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using API.Models;
+using API.DTO;
+using api.Enums;
 
 namespace API.Controllers
 {
@@ -24,7 +26,7 @@ namespace API.Controllers
 
         // GET: api/packages/5?shopId=
         [ResponseType(typeof(Package))]
-        public IHttpActionResult GetPackageDetails(int id,string shopId)
+        public IHttpActionResult GetPackage(int id,string shopId)
         {
             Package package = dbCtx.Packages.Find(id);
             if (package == null)
@@ -119,5 +121,53 @@ namespace API.Controllers
         {
             return dbCtx.Packages.Count(e => e.Id == id) > 0;
         }
+
+
+
+        //rpc routes
+        //GetAllPackagesBrief: rpc/Packages/GetPackagesBriefs?shopId={shopId}&skip={startIndex}&take={set}&status={status}"
+        //[Route("rpc/Packages/GetPackagesBriefs?shopId={shopId}&skip={startIndex}&take={set}&status={status}")]
+        public IHttpActionResult GetPackagesBriefs(string shopId,int startIndex,int set,int status)
+        {
+            IQueryable<Package> packages;
+            if(status == -1)
+            {
+                packages = dbCtx.Packages.Where(p => p.ShopId == shopId).Skip(startIndex).Take(set);
+            }
+            else
+            {
+                packages = dbCtx.Packages.Where(p => p.ShopId == shopId && p.Status== (OrderStatus)status).Skip(startIndex).Take(set);
+            }
+            List<PackageBriefDTO> packagesBriefs = new List<PackageBriefDTO>();
+            foreach (var package in packages)
+            {
+                PackageBriefDTO pb = new PackageBriefDTO
+                {
+                    PackageId = package.Id,
+                    PackageStatus = package.Status,
+                    DeliveryTime = package.DeliveryTime,
+                    ShippingData = package.Order.ShipmentData,
+                    TotalCharge = 0
+                };
+                // now find products that belong to that package
+                IEnumerable<OrderProduct> PackageProducts = package.Order.OrderProducts.Where(o => o.Product.ShopID == shopId);
+                double totalPrice = 0;
+                foreach (var orderProduct in PackageProducts)
+                {
+                    if (orderProduct.Product.Discount != null)
+                    {
+                        totalPrice += (orderProduct.Product.Price - (double)orderProduct.Product.Discount) * orderProduct.Quantity;
+                    }
+                    else
+                    {
+                        totalPrice += orderProduct.Product.Price * orderProduct.Quantity;
+                    }
+                }
+                pb.TotalCharge = totalPrice;
+                packagesBriefs.Add(pb);
+            }
+            return Ok(packagesBriefs);
+        }
+
     }
 }

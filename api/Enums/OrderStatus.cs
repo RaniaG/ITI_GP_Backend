@@ -8,6 +8,6 @@ namespace api.Enums
 {
     public enum OrderStatus
     {
-        pending,ready,outForDelivery,Delivered
+        pending,ready,Shipped,Delivered
     }
 }

@@ -121,16 +121,6 @@ namespace API.Controllers
             }
             return Ok(new ShopDTO(shop));
         }
-        // GET: api/FollowedShop
-        [ResponseType(typeof(Shop))]
-        [Route("api/FollowedShop")]
-        [Authorize]
-        public List<Shop>  GetFollowedShop()
-        {
-            string email = RequestContext.Principal.Identity.Name;
-            ApplicationUser user = db.Users.FirstOrDefault(u => u.Email == email);
-            return user.FollowedShops.ToList();    
-        }
 
         // PUT: api/Shops
         [ResponseType(typeof(void))]
@@ -270,28 +260,32 @@ namespace API.Controllers
 
         }
 
-        //[Route("api/shop/GetSubscriptionType")]
-        public IHttpActionResult GetSubscriptionType([FromUri] string id)
+        //[Route("rpc/shops/GetSubscriptionType/{id}")]
+        public HttpResponseMessage GetSubscriptionType([FromUri] string id)
         {
             Shop shop = db.Shops.Find(id);
             if (shop == null)
             {
-                return NotFound();
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
             string subscriptionType = shop.Subscription == 0 ? "free" : "premium";
-            return Ok(subscriptionType);
+            var response = Request.CreateResponse(HttpStatusCode.OK, subscriptionType);
+
+            return response;
         }
-        public IHttpActionResult GetShopInventoryInfo([FromUri] string id)
+        //[Route("rpc/shops/GetShopInventoryInfo/{id}")]
+        public HttpResponseMessage GetShopInventoryInfo([FromUri] string id)
         {
             Shop shop = db.Shops.Find(id);
            
             if (shop == null)
             {
-                return NotFound();
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
             int usedSlots =shop.Products!=null?shop.Products.Count(p=>!p.IsDeleted):0;
             var InventoryInfo = new { maxSlots = shop.Subscription == 0 ? 50 : 100, usedSlots = usedSlots };
-            return Ok(InventoryInfo);
+            var response = Request.CreateResponse(HttpStatusCode.OK, InventoryInfo);
+            return response;
         }
 
     }
