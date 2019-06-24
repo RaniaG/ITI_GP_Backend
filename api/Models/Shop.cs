@@ -55,5 +55,12 @@ namespace API.Models
         [InverseProperty("FollowedShops")]
         public List<ApplicationUser> FollowedBy { get; set; }
 
+        public Shop()
+        {
+            FollowedBy = new List<ApplicationUser>();
+            ReviewRatings = new List<ReviewRating>();
+            VisitedBy = new List<ShopVisit>();
+            Packages = new List<Package>();
+        }
     }
 }

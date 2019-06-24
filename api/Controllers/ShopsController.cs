@@ -11,6 +11,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using api.Enums;
 using API.DTOs;
+using API.Enums;
+using API.Helpers;
 using API.Models;
 using JsonPatch;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -121,6 +123,16 @@ namespace API.Controllers
             }
             return Ok(new ShopDTO(shop));
         }
+        // GET: api/FollowedShop
+        [ResponseType(typeof(Shop))]
+        [Route("api/FollowedShop")]
+        [Authorize]
+        public List<Shop>  GetFollowedShop()
+        {
+            string email = RequestContext.Principal.Identity.Name;
+            ApplicationUser user = db.Users.FirstOrDefault(u => u.Email == email);
+            return user.FollowedShops.ToList();    
+        }
 
         // PUT: api/Shops
         [ResponseType(typeof(void))]
@@ -128,8 +140,7 @@ namespace API.Controllers
         [Authorize]
         public IHttpActionResult PutShop(Shop shop)
         {
-            string email = RequestContext.Principal.Identity.Name;
-            ApplicationUser user = db.Users.FirstOrDefault(u => u.Email == email);
+            ApplicationUser user = Helper.GetUser(RequestContext, db);
             string id = user.Id;
 
             if (shop.Id != id)
@@ -140,9 +151,17 @@ namespace API.Controllers
             if(s == null||s.IsDeleted)
                 return NotFound();
             //unchanged values
-            shop.IsDeleted = s.IsDeleted;
-            shop.Rating = s.Rating;
-            shop.User = s.User;
+            
+            s.Name = shop.Name==null?s.Name:shop.Name;
+            s.About = shop.About==null?s.About:shop.About;
+            s.Policy = shop.Policy==null?s.Policy:shop.Policy;
+            s.PostalCode = shop.PostalCode==null?s.PostalCode:shop.PostalCode;
+            s.Street = shop.Street==null?s.Street:shop.Street;
+            s.CityId = shop.CityId==0?s.CityId:shop.CityId;
+            s.CountryId = shop.CountryId==0?s.CountryId:shop.CountryId;
+            s.DistrictId = shop.DistrictId==0?s.DistrictId:shop.DistrictId;
+
+          
             //s = shop;
             //db.Shops.Attach(shop);
             //db.Entry(shop).State = EntityState.Added;
@@ -167,6 +186,36 @@ namespace API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+
+        //POST: api/Shop/Subscription/{sub}
+        [ResponseType(typeof(Shop))]
+        [Authorize]
+        [HttpPost]
+        public IHttpActionResult UpdateShopSubscription(int sub)
+        {
+            ApplicationUser user = Helper.GetUser(RequestContext, db);
+            Shop shop = db.Shops.Find(user.Id);
+            if (shop== null)//user has shop
+                return NotFound();
+            if (sub < 0 || sub > 2)
+                return BadRequest();
+
+            IQueryable<Product> products= db.Products.Where(el => el.ShopID == shop.Id);
+            switch ((SubscriptionType)sub)
+            {
+                case SubscriptionType.Premium:
+                    products.ForEachAsync(el => el.LifeTime = (int)ProductSubscriptionLifeTime.Premium);
+                    break;
+                case SubscriptionType.Gold:
+                    products.ForEachAsync(el => el.LifeTime = (int)ProductSubscriptionLifeTime.Gold);
+                    break;
+                case SubscriptionType.Free:
+                    products.ForEachAsync(el => el.LifeTime = (int)ProductSubscriptionLifeTime.Free);
+                    break;
+            }
+                return Ok();
+        }
+
         // POST: api/Shops
         [ResponseType(typeof(Shop))]
         [Authorize]
@@ -177,8 +226,8 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
             
-            string email=RequestContext.Principal.Identity.Name;
-            ApplicationUser user=db.Users.FirstOrDefault(u => u.Email == email);
+            ApplicationUser user = Helper.GetUser(RequestContext, db);
+            
             shop.User = user;
             shop.Id = user.Id;
             shop.Country = db.Countries.FirstOrDefault(c => c.Id == shop.CountryId);
@@ -186,6 +235,8 @@ namespace API.Controllers
             shop.District = db.Districts.FirstOrDefault(c => c.Id == shop.DistrictId);
             shop.Rating = 0;
             shop.IsDeleted = false;
+
+
             db.Shops.Add(shop);
             assignRole(shop.Id);
             try
@@ -207,14 +258,41 @@ namespace API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = shop.Id }, new ShopDTO( shop));
         }
 
+
+        [Route("api/Shop/DeliveryAddress")]
+        [Authorize]
+        [HttpPost]
+        public IHttpActionResult AddDeliveryAddress([FromBody]ShopDeliveryAddresses[] addresses)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            ApplicationUser user = Helper.GetUser(RequestContext,db);
+            if (db.Shops.Find(user.Id) == null)
+                return Unauthorized();
+
+            for (int i = 0; i < addresses.Length; i++)
+            {
+                db.ShopDeliveryAddresses.Add(addresses[i]);
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
         // DELETE: api/Shops
         [ResponseType(typeof(Shop))]
         [Authorize]
         public IHttpActionResult DeleteShop()
         {
-            string email = RequestContext.Principal.Identity.Name;
-            ApplicationUser user = db.Users.FirstOrDefault(u => u.Email == email);
-            
+            ApplicationUser user = Helper.GetUser(RequestContext, db);
+
             Shop shop = db.Shops.Find(user.Id);
             if (shop == null)
             {
@@ -229,9 +307,25 @@ namespace API.Controllers
         }
 
 
-        /* change photo and cover */
+        ///* change photo and cover */
+        [Route("api/Shop/Follow/{id}")]
+        [Authorize]
+        [HttpPost]
+        public IHttpActionResult FollowShop(string id)
+        {
+            ApplicationUser user = Helper.GetUser(RequestContext, db);
 
-        
+            Shop shop = db.Shops.Find(id);
+            if (shop != null)
+            {
+                shop.FollowedBy.Add(user);
+                db.SaveChanges();
+            }
+            else return NotFound();
+
+            return Ok();
+
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
