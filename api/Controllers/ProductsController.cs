@@ -119,12 +119,23 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
             //get product from db
-            //if (id != product.Id)
-            //{
-            //    return BadRequest();
-            //}
-            //Product productDB = db.Products.Find(id);
+            
             Product productDB = db.Products.Find(product.Id);
+
+            productDB.Name = product.Name == null ? productDB.Name : product.Name;
+            productDB.Price = product.Price == 0 ? productDB.Price : product.Price;
+            productDB.Discount = product.Discount == 0 ? productDB.Discount : product.Discount;
+            productDB.Price = product.Price == 0 ? productDB.Price : product.Price;
+            productDB.Quantity = product.Quantity == 0 ? productDB.Quantity : product.Quantity;
+            productDB.Description = product.Description == null ? productDB.Description : product.Description;
+            productDB.Terms = product.Terms == null ? productDB.Terms : product.Terms;
+            productDB.MinDeliveryTime = product.MinDeliveryTime == 0 ? productDB.MinDeliveryTime : product.MinDeliveryTime;
+            productDB.MaxDeliveryTime = product.MaxDeliveryTime == 0 ? productDB.MaxDeliveryTime : product.MaxDeliveryTime;
+            productDB.Variations = product.Variations == null ? productDB.Variations : product.Variations;
+            //productDB.PublishTime = product.PublishTime == null ? productDB.PublishTime : product.PublishTime;
+            productDB.CategoryId = product.CategoryId == 0 ? productDB.CategoryId : product.CategoryId;
+
+
 
             if (productDB == null)
                 return NotFound();
@@ -183,7 +194,7 @@ namespace API.Controllers
                 CategoryId = productDTO.CategoryId,
                 Category = db.Categories.Find(productDTO.CategoryId),
                 Shop = db.Shops.Find(user.Id),
-                PublishTime=productDTO.PublishTime==null?DateTime.Now:(DateTime)productDTO.PublishTime
+                //PublishTime=productDTO.PublishTime==null?DateTime.Now:(DateTime)productDTO.PublishTime
                 
             };
             switch (shop.Subscription)
@@ -202,6 +213,25 @@ namespace API.Controllers
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = product.Id },  ProductDTO.ToDTO(product) );
+        }
+
+        [Route("api/Product/Publish/{id}")]
+        [HttpPost]
+        [Authorize]
+        public IHttpActionResult PublishProduct([FromUri]int id)
+        {
+            Product p = db.Products.Find(id);
+            if (p == null)
+                return BadRequest();
+            ApplicationUser user = Helper.GetUser(RequestContext, db);
+            if (p.ShopID != user.Id)
+                return Unauthorized();
+            if (p.Active)
+                return BadRequest();
+            p.PublishTime = DateTime.Now;
+            p.Active = true;
+            db.SaveChanges();
+            return Ok(ProductDTO.ToDTO(p));
         }
 
         // DELETE: api/Products/5

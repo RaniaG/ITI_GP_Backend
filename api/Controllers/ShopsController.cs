@@ -151,13 +151,17 @@ namespace API.Controllers
             if(s == null||s.IsDeleted)
                 return NotFound();
             //unchanged values
-            shop.IsDeleted = s.IsDeleted;
-            shop.Rating = s.Rating;
-            shop.User = s.User;
-            shop.Subscription = s.Subscription;
-
             
+            s.Name = shop.Name==null?s.Name:shop.Name;
+            s.About = shop.About==null?s.About:shop.About;
+            s.Policy = shop.Policy==null?s.Policy:shop.Policy;
+            s.PostalCode = shop.PostalCode==null?s.PostalCode:shop.PostalCode;
+            s.Street = shop.Street==null?s.Street:shop.Street;
+            s.CityId = shop.CityId==0?s.CityId:shop.CityId;
+            s.CountryId = shop.CountryId==0?s.CountryId:shop.CountryId;
+            s.DistrictId = shop.DistrictId==0?s.DistrictId:shop.DistrictId;
 
+          
             //s = shop;
             //db.Shops.Attach(shop);
             //db.Entry(shop).State = EntityState.Added;
@@ -221,7 +225,9 @@ namespace API.Controllers
             {
                 return BadRequest(ModelState);
             }
+            
             ApplicationUser user = Helper.GetUser(RequestContext, db);
+            
             shop.User = user;
             shop.Id = user.Id;
             shop.Country = db.Countries.FirstOrDefault(c => c.Id == shop.CountryId);
@@ -252,6 +258,34 @@ namespace API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = shop.Id }, new ShopDTO( shop));
         }
 
+
+        [Route("api/Shop/DeliveryAddress")]
+        [Authorize]
+        [HttpPost]
+        public IHttpActionResult AddDeliveryAddress([FromBody]ShopDeliveryAddresses[] addresses)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            ApplicationUser user = Helper.GetUser(RequestContext,db);
+            if (db.Shops.Find(user.Id) == null)
+                return Unauthorized();
+
+            for (int i = 0; i < addresses.Length; i++)
+            {
+                db.ShopDeliveryAddresses.Add(addresses[i]);
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
         // DELETE: api/Shops
         [ResponseType(typeof(Shop))]
         [Authorize]

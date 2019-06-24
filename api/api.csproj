@@ -269,6 +269,14 @@
     <Compile Include="Migrations\201906232037173_createdFollowShopRelation.Designer.cs">
       <DependentUpon>201906232037173_createdFollowShopRelation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906240836500_modifiedShopDeliveryAddress.cs" />
+    <Compile Include="Migrations\201906240836500_modifiedShopDeliveryAddress.Designer.cs">
+      <DependentUpon>201906240836500_modifiedShopDeliveryAddress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.cs" />
+    <Compile Include="Migrations\201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.Designer.cs">
+      <DependentUpon>201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -407,6 +415,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906232037173_createdFollowShopRelation.resx">
       <DependentUpon>201906232037173_createdFollowShopRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906240836500_modifiedShopDeliveryAddress.resx">
+      <DependentUpon>201906240836500_modifiedShopDeliveryAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.resx">
+      <DependentUpon>201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
