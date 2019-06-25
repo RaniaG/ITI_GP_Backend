@@ -12,8 +12,9 @@ namespace API.Helpers
             System.Web.Http.Controllers.HttpRequestContext RequestContext,
             ApplicationDbContext db)
         {
-            string email = RequestContext.Principal.Identity.Name;
-            return db.Users.FirstOrDefault(u => u.Email == email);
+            string name = RequestContext.Principal.Identity.Name;
+            return db.Users.FirstOrDefault(u => u.UserName == name);
+         
         }  
     }
 }
