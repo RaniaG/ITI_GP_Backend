@@ -105,5 +105,7 @@ namespace API.Models
             base.OnModelCreating(modelBuilder);
             
         }
+
+       // public System.Data.Entity.DbSet<API.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

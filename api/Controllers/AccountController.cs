@@ -16,6 +16,9 @@ using Microsoft.Owin.Security.OAuth;
 using API.Models;
 using API.Providers;
 using API.Results;
+using System.Linq;
+using API.DTOs;
+using API.Helpers;
 
 namespace API.Controllers
 {
@@ -50,6 +53,19 @@ namespace API.Controllers
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
+
+        //GET api/Account/User
+        [Route("LoggedInUser")]
+        [HttpGet]
+        [Authorize]
+        public IHttpActionResult GetLoggedInUserInfo()
+        {
+            string id = User.Identity.GetUserId();
+            ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
+            ApplicationUserDTO userDTO = new ApplicationUserDTO(user);
+            return Ok(userDTO);
+
+        }
 
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
