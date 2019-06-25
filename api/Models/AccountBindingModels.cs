@@ -55,7 +55,7 @@ namespace API.Models
         [Required]
         public string LastName { get; set; }
         [Required]
-        [RegularExpression("/^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/")]
+        [RegularExpression("^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$")]
         public string UserName { get; set; }
         public string PhoneNumber { get; set; }
         [Required]
