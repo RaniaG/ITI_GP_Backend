@@ -284,6 +284,10 @@
     <Compile Include="Migrations\201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.Designer.cs">
       <DependentUpon>201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906250836376_addedPriceToPackageAndOrder.cs" />
+    <Compile Include="Migrations\201906250836376_addedPriceToPackageAndOrder.Designer.cs">
+      <DependentUpon>201906250836376_addedPriceToPackageAndOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -428,6 +432,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.resx">
       <DependentUpon>201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906250836376_addedPriceToPackageAndOrder.resx">
+      <DependentUpon>201906250836376_addedPriceToPackageAndOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

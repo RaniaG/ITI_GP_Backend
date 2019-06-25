@@ -24,5 +24,7 @@ namespace API.Models
         public string ShopId { get; set; }
         public OrderStatus Status { get; set; }
         public DateTime DeliveryTime { get; set; }
+
+        public double Price { get; set; }
     }
 }

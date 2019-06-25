@@ -31,5 +31,7 @@ namespace API.Models
         public List<Package> Packages { get; set; }
 
         public Boolean IsDeleted { get; set; }
+
+        public double Price { get; set; }
     }
 }
