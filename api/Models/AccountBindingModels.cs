@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using api.Enums;
 using Newtonsoft.Json;
 
 namespace API.Models
@@ -48,6 +49,17 @@ namespace API.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
+        [Required]
+        [RegularExpression("/^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/")]
+        public string UserName { get; set; }
+        public string PhoneNumber { get; set; }
+        [Required]
+        public Gender Gender { get; set; }
     }
 
     public class RegisterExternalBindingModel

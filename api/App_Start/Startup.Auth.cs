@@ -10,6 +10,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using API.Providers;
 using API.Models;
+using System.Web.Http.Cors;
 
 namespace API
 {
@@ -27,6 +28,8 @@ namespace API
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
 
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+            
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
             app.UseCookieAuthentication(new CookieAuthenticationOptions());

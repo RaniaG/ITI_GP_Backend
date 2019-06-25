@@ -49,6 +49,12 @@
       <HintPath>..\packages\JsonPatch.1.0.2\lib\net45\JsonPatch.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.4.0.1\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -65,9 +71,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Http.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.7\lib\net45\System.Web.Http.Cors.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.4\lib\net45\System.Web.Http.Cors.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
@@ -147,9 +152,6 @@
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin">
-      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
@@ -281,6 +283,10 @@
     <Compile Include="Migrations\201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.cs" />
     <Compile Include="Migrations\201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.Designer.cs">
       <DependentUpon>201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906250836376_addedPriceToPackageAndOrder.cs" />
+    <Compile Include="Migrations\201906250836376_addedPriceToPackageAndOrder.Designer.cs">
+      <DependentUpon>201906250836376_addedPriceToPackageAndOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -426,6 +432,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.resx">
       <DependentUpon>201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906250836376_addedPriceToPackageAndOrder.resx">
+      <DependentUpon>201906250836376_addedPriceToPackageAndOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

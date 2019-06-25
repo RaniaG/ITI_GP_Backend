@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using api.Enums;
 using API.DTOs;
@@ -20,6 +21,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace API.Controllers
 {
+    [EnableCorsAttribute("http://localhost:4200", "*", "*")]
     public class ShopsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -87,9 +89,9 @@ namespace API.Controllers
                 Id = shop.Id,
                 Name = shop.Name,
                 Rating = shop.Rating,
-                City = shop.CityId,
-                Country = shop.CountryId,
-                District = shop.DistrictId,
+                CityId = shop.CityId,
+                CountryId = shop.CountryId,
+                DistrictId = shop.DistrictId,
                 About = shop.About,
                 Policy = shop.Policy,
                 Street = shop.Street,
@@ -238,7 +240,7 @@ namespace API.Controllers
 
 
             db.Shops.Add(shop);
-            assignRole(shop.Id);
+            //assignRole(shop.Id);
             try
             {
                 db.SaveChanges();
@@ -308,6 +310,27 @@ namespace API.Controllers
 
 
         ///* change photo and cover */
+
+
+
+        [Route("api/Shop/ValidateName/{name}")]
+        //[Authorize]
+        [HttpPost]
+        public IHttpActionResult ValidateShopName([FromUri]string name,string id="")
+        {
+            Shop shop;
+            if (id != "")
+                shop = db.Shops.FirstOrDefault(el => el.Name == name && id != el.Id);
+            else shop = db.Shops.FirstOrDefault(el => el.Name == name);
+            if (shop == null)
+
+                return Ok();
+
+            else return Conflict();
+
+        }
+
+
         [Route("api/Shop/Follow/{id}")]
         [Authorize]
         [HttpPost]
