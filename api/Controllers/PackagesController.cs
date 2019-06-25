@@ -123,20 +123,20 @@ namespace API.Controllers
         }
 
 
-
+         //[Route("rpc/shops/GetShopInventoryInfo/{id}")]
         //rpc routes
         //GetAllPackagesBrief: rpc/Packages/GetPackagesBriefs?shopId={shopId}&skip={startIndex}&take={set}&status={status}"
         //[Route("rpc/Packages/GetPackagesBriefs?shopId={shopId}&skip={startIndex}&take={set}&status={status}")]
-        public IHttpActionResult GetPackagesBriefs(string shopId,int startIndex,int set,int status)
+        public IHttpActionResult GetPackagesBriefs(string shopId,int skip,int take,int status)
         {
             IQueryable<Package> packages;
             if(status == -1)
             {
-                packages = dbCtx.Packages.Where(p => p.ShopId == shopId).Skip(startIndex).Take(set);
+                packages = dbCtx.Packages.Where(p => p.ShopId == shopId).Skip(skip).Take(take);
             }
             else
             {
-                packages = dbCtx.Packages.Where(p => p.ShopId == shopId && p.Status== (OrderStatus)status).Skip(startIndex).Take(set);
+                packages = dbCtx.Packages.Where(p => p.ShopId == shopId && p.Status== (OrderStatus)status).Skip(skip).Take(take);
             }
             List<PackageBriefDTO> packagesBriefs = new List<PackageBriefDTO>();
             foreach (var package in packages)
