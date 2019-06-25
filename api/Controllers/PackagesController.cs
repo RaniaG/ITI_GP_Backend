@@ -18,15 +18,9 @@ namespace API.Controllers
     {
         private ApplicationDbContext dbCtx = new ApplicationDbContext();
 
-        // GET: api/Packages
-        public IQueryable<Package> GetPackages()
-        {
-            return dbCtx.Packages;
-        }
-
-        // GET: api/packages/5?shopId=
-        [ResponseType(typeof(Package))]
-        public IHttpActionResult GetPackage(int id,string shopId)
+        // GET: rpc/packages/GetPackageDetails/5?shopId=
+        [ResponseType(typeof(PackageDetailsDTO))]
+        public IHttpActionResult GetPackageDetails(int id,string shopId)
         {
             Package package = dbCtx.Packages.Find(id);
             if (package == null)
@@ -35,9 +29,45 @@ namespace API.Controllers
             }
             else
             {
-                //get package poco
-            return Ok(package);
+                //get packageDTO
+                PackageDetailsDTO pd = new PackageDetailsDTO()
+                {
+                    DeliveryMethod = "Door To Door",
+                    DeliveryTime = package.DeliveryTime,
+                    PackageId = package.Id,
+                    PackageStatus = package.Status,
+                    PaymentMethod = dbCtx.Orders.FirstOrDefault(o => o.Id == package.OrderId).PaymentMethod,
+                    ShippingFees=50,
+                    TotalCharge=package.Price,                   
+                };
 
+
+                List <OrderProduct> orderProducts  = dbCtx.OrderProducts.Include("Product").Where(op => op.OrderId == package.OrderId ).ToList();
+                List<OrderProduct> packageOrder = orderProducts.Where(p => p.Product.ShopID == shopId).ToList();
+
+                Order orderRequested = dbCtx.Orders.FirstOrDefault(o=>o.Id==package.OrderId);
+                ShipmentData packageShipmentData = dbCtx.ShipmentDatas.Include("Country").Include("District").Include("City").FirstOrDefault(s => s.Id == orderRequested.ShipmentDataId);
+                pd.ShippingData = orderRequested.ShipmentData;
+
+                List<PackageProductDTO> packageProductList = new List<PackageProductDTO>();
+                PackageProductDTO singleProduct;
+                foreach (var orderProduct in orderProducts)
+                {
+                    singleProduct = new PackageProductDTO()
+                    {
+                        Id=orderProduct.Product.Id,
+                        Name=orderProduct.Product.Name,
+                        Images=orderProduct.Product.Images,
+                        PackageId=package.Id,
+                        Variations=orderProduct.Variations,
+                        Discount= orderProduct.Product.Discount==null?0: orderProduct.Product.Discount,
+                        Quantity= orderProduct.Quantity,
+                        Price= orderProduct.Quantity,
+                    };
+                    packageProductList.Add(singleProduct);
+                }
+                pd.ProductList = packageProductList;
+            return Ok(package);
             }
 
         }
@@ -121,18 +151,17 @@ namespace API.Controllers
         {
             return dbCtx.Packages.Count(e => e.Id == id) > 0;
         }
-
-
-         //[Route("rpc/shops/GetShopInventoryInfo/{id}")]
         //rpc routes
-        //GetAllPackagesBrief: rpc/Packages/GetPackagesBriefs?shopId={shopId}&skip={startIndex}&take={set}&status={status}"
-        //[Route("rpc/Packages/GetPackagesBriefs?shopId={shopId}&skip={startIndex}&take={set}&status={status}")]
-        public IHttpActionResult GetPackagesBriefs(string shopId,int skip,int take,int status)
+        //GetAllPackagesBrief: rpc/Packages/GetPackagesBriefs?shopId={shopId}&skip={skip}&take={take}&status={status}"
+
+            // need a resolver in front to make sure shop exists
+        public HttpResponseMessage GetPackagesBriefs(string shopId,int skip,int take,int status)
         {
             IQueryable<Package> packages;
+            List<ShipmentData> shipmentDatas = dbCtx.ShipmentDatas.ToList();
             if(status == -1)
             {
-                packages = dbCtx.Packages.Where(p => p.ShopId == shopId).Skip(skip).Take(take);
+                packages = dbCtx.Packages.Where(p => p.ShopId == shopId).Include("Order").OrderBy(p=>p.DeliveryTime).Skip(skip).Take(take);
             }
             else
             {
@@ -141,32 +170,35 @@ namespace API.Controllers
             List<PackageBriefDTO> packagesBriefs = new List<PackageBriefDTO>();
             foreach (var package in packages)
             {
-                PackageBriefDTO pb = new PackageBriefDTO
+                //x.FirstOrDefault(s => s.Id == package.Order.ShipmentDataId);
+                PackageBriefDTO pb = new PackageBriefDTO()
                 {
                     PackageId = package.Id,
-                    PackageStatus = package.Status,
+                    PackageStatus = (OrderStatus)package.Status,
                     DeliveryTime = package.DeliveryTime,
-                    ShippingData = package.Order.ShipmentData,
-                    TotalCharge = 0
+                    ShippingData = shipmentDatas.FirstOrDefault(s=>s.UserId == package.Order.UserId && s.Id==package.Order.ShipmentDataId),
+                    TotalCharge = package.Price
                 };
                 // now find products that belong to that package
-                IEnumerable<OrderProduct> PackageProducts = package.Order.OrderProducts.Where(o => o.Product.ShopID == shopId);
-                double totalPrice = 0;
-                foreach (var orderProduct in PackageProducts)
-                {
-                    if (orderProduct.Product.Discount != null)
-                    {
-                        totalPrice += (orderProduct.Product.Price - (double)orderProduct.Product.Discount) * orderProduct.Quantity;
-                    }
-                    else
-                    {
-                        totalPrice += orderProduct.Product.Price * orderProduct.Quantity;
-                    }
-                }
-                pb.TotalCharge = totalPrice;
+                //IEnumerable<OrderProduct> PackageProducts = package.Order.OrderProducts.Where(o => o.Product.ShopID == shopId);
+                //double totalPrice = 0;
+                //foreach (var orderProduct in PackageProducts)
+                //{
+                //    if (orderProduct.Product.Discount != null)
+                //    {
+                //        totalPrice += (orderProduct.Product.Price - (double)orderProduct.Product.Discount) * orderProduct.Quantity;
+                //    }
+                //    else
+                //    {
+                //        totalPrice += orderProduct.Product.Price * orderProduct.Quantity;
+                //    }
+                //}
+                //pb.TotalCharge = totalPrice;
                 packagesBriefs.Add(pb);
             }
-            return Ok(packagesBriefs);
+            var response = Request.CreateResponse(HttpStatusCode.OK, packagesBriefs);
+
+            return response;
         }
 
     }

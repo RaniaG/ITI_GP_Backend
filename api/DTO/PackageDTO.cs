@@ -14,7 +14,7 @@ namespace API.DTO
         public ShipmentData ShippingData { get; set; }
         public PaymentMethods PaymentMethod { get; set; }
         public string DeliveryMethod { get; set; }
-        public PackageProductDTO ProductList { get; set; }
+        public List<PackageProductDTO> ProductList { get; set; }
         public double ShippingFees { get; set; }
         public double TotalCharge { get; set; }
     }
