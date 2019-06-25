@@ -329,7 +329,7 @@ namespace API.Controllers
             }
 
             var user = new ApplicationUser() {
-                UserName = model.Email,
+                UserName = model.UserName,
                 Email = model.Email,
                 PhoneNumber=model.PhoneNumber,
                 Gender=model.Gender,
