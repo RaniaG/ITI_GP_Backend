@@ -131,8 +131,9 @@ namespace API.Controllers
         [Authorize]
         public List<Shop>  GetFollowedShop()
         {
+           // ApplicationUser user = Helper.GetUser(RequestContext, db);
             string email = RequestContext.Principal.Identity.Name;
-            ApplicationUser user = db.Users.FirstOrDefault(u => u.Email == email);
+            ApplicationUser user = db.Users.FirstOrDefault(u => u.UserName == email);
             return user.FollowedShops.ToList();    
         }
 

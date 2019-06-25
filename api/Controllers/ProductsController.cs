@@ -89,7 +89,9 @@ namespace API.Controllers
        [Authorize]
         public List<Product> GetFavoriteItems()
         {
-            ApplicationUser user = Helper.GetUser(RequestContext, db);
+            //ApplicationUser user = Helper.GetUser(RequestContext, db);
+            string name = RequestContext.Principal.Identity.Name;
+            ApplicationUser user = db.Users.FirstOrDefault(u => u.UserName == name);
             return user.FavouriteProducts.ToList();
         }
 

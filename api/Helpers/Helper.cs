@@ -14,6 +14,6 @@ namespace API.Helpers
         {
             string email = RequestContext.Principal.Identity.Name;
             return db.Users.FirstOrDefault(u => u.Email == email);
-        }
+        }  
     }
 }
