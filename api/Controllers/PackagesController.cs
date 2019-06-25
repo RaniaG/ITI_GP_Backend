@@ -46,7 +46,7 @@ namespace API.Controllers
                 List<OrderProduct> packageOrder = orderProducts.Where(p => p.Product.ShopID == shopId).ToList();
 
                 Order orderRequested = dbCtx.Orders.FirstOrDefault(o=>o.Id==package.OrderId);
-                ShipmentData packageShipmentData = dbCtx.ShipmentDatas.Include("Country").Include("District").Include("City").FirstOrDefault(s => s.Id == orderRequested.ShipmentDataId);
+                ShipmentData packageShipmentData = dbCtx.ShipmentDatas.FirstOrDefault(s => s.Id == orderRequested.ShipmentDataId);
                 pd.ShippingData = orderRequested.ShipmentData;
 
                 List<PackageProductDTO> packageProductList = new List<PackageProductDTO>();
@@ -108,7 +108,7 @@ namespace API.Controllers
         }
 
         // POST: api/Packages
-        [ResponseType(typeof(Package))]
+        //[ResponseType(typeof(Package))]
         public IHttpActionResult PostPackage(Package package)
         {
             if (!ModelState.IsValid)
@@ -119,7 +119,8 @@ namespace API.Controllers
             dbCtx.Packages.Add(package);
             dbCtx.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = package.Id }, package);
+            //return CreatedAtRoute("DefaultApi", new { id = package.Id }, package);
+            return Ok();
         }
 
         // DELETE: api/Packages/5
@@ -200,6 +201,48 @@ namespace API.Controllers
 
             return response;
         }
+        public IHttpActionResult GetPackagesCount(string shopId, int status)
+        {
+          Shop  shop = dbCtx.Shops.Find(shopId);
+            if (shop == null)
+                return NotFound();
+            else
+            {
+
+                if (status == -1)
+                    return Ok(dbCtx.Packages.Count(p => p.ShopId == shopId));
+                else
+                    return Ok(dbCtx.Packages.Count(p => p.ShopId == shopId && p.Status==(OrderStatus)status));
+            }
+        }
+        public IHttpActionResult GetDeliveredPackagesCount(string shopId)
+        {
+            Shop shop = dbCtx.Shops.Find(shopId);
+            if (shop == null)
+                return NotFound();
+            else
+            {
+                return Ok(dbCtx.Packages.Count(p => p.ShopId == shopId && p.Status==OrderStatus.Delivered));
+            }
+        }
+
+        public IHttpActionResult GetPackagesRevenu(string shopId)
+        {
+            Shop shop = dbCtx.Shops.Find(shopId);
+            if (shop == null)
+                return NotFound();
+            else
+            {
+                List<Package> pkgs = dbCtx.Packages.Where(p => p.ShopId == shopId && p.Status==OrderStatus.Delivered).ToList();
+                double revenu = 0;
+                foreach (var pkg in pkgs)
+                {
+                    revenu += pkg.Price;
+                }
+                return Ok(revenu);
+            }
+        }
+
 
     }
 }
