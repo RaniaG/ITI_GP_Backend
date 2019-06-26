@@ -149,7 +149,26 @@ namespace API.Controllers
 
             return Ok();
         }
+        // POST api/Account/ChangeUserInfo
+        [Route("ChangeUserInfo")]
+        public async Task<IHttpActionResult> ChangeUserInfo(ApplicationUser user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
 
+            IdentityResult result = await UserManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+
+            return Ok();
+        }
         // POST api/Account/SetPassword
         [Route("SetPassword")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
@@ -515,4 +534,6 @@ namespace API.Controllers
 
         #endregion
     }
+ 
+
 }

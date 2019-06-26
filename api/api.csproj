@@ -248,47 +248,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Helper.cs" />
-    <Compile Include="Migrations\201906211854178_initial.cs" />
-    <Compile Include="Migrations\201906211854178_initial.Designer.cs">
-      <DependentUpon>201906211854178_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906211901219_ReCreatedDBUsingAnnotations.cs" />
-    <Compile Include="Migrations\201906211901219_ReCreatedDBUsingAnnotations.Designer.cs">
-      <DependentUpon>201906211901219_ReCreatedDBUsingAnnotations.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906212035357_updateUserShopRelation.cs" />
-    <Compile Include="Migrations\201906212035357_updateUserShopRelation.Designer.cs">
-      <DependentUpon>201906212035357_updateUserShopRelation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906232006177_DropFavouriteProductRelation.cs" />
-    <Compile Include="Migrations\201906232006177_DropFavouriteProductRelation.Designer.cs">
-      <DependentUpon>201906232006177_DropFavouriteProductRelation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906232009565_RecreatedFavouriteProductTable.cs" />
-    <Compile Include="Migrations\201906232009565_RecreatedFavouriteProductTable.Designer.cs">
-      <DependentUpon>201906232009565_RecreatedFavouriteProductTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906232034162_removedFollowShopRelation.cs" />
-    <Compile Include="Migrations\201906232034162_removedFollowShopRelation.Designer.cs">
-      <DependentUpon>201906232034162_removedFollowShopRelation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906232037173_createdFollowShopRelation.cs" />
-    <Compile Include="Migrations\201906232037173_createdFollowShopRelation.Designer.cs">
-      <DependentUpon>201906232037173_createdFollowShopRelation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906240836500_modifiedShopDeliveryAddress.cs" />
-    <Compile Include="Migrations\201906240836500_modifiedShopDeliveryAddress.Designer.cs">
-      <DependentUpon>201906240836500_modifiedShopDeliveryAddress.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.cs" />
-    <Compile Include="Migrations\201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.Designer.cs">
-      <DependentUpon>201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906250836376_addedPriceToPackageAndOrder.cs" />
-    <Compile Include="Migrations\201906250836376_addedPriceToPackageAndOrder.Designer.cs">
-      <DependentUpon>201906250836376_addedPriceToPackageAndOrder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -406,38 +365,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201906211854178_initial.resx">
-      <DependentUpon>201906211854178_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906211901219_ReCreatedDBUsingAnnotations.resx">
-      <DependentUpon>201906211901219_ReCreatedDBUsingAnnotations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906212035357_updateUserShopRelation.resx">
-      <DependentUpon>201906212035357_updateUserShopRelation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906232006177_DropFavouriteProductRelation.resx">
-      <DependentUpon>201906232006177_DropFavouriteProductRelation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906232009565_RecreatedFavouriteProductTable.resx">
-      <DependentUpon>201906232009565_RecreatedFavouriteProductTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906232034162_removedFollowShopRelation.resx">
-      <DependentUpon>201906232034162_removedFollowShopRelation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906232037173_createdFollowShopRelation.resx">
-      <DependentUpon>201906232037173_createdFollowShopRelation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906240836500_modifiedShopDeliveryAddress.resx">
-      <DependentUpon>201906240836500_modifiedShopDeliveryAddress.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.resx">
-      <DependentUpon>201906240839348_modifiedShopDeliveryAddressAddedShopIdasPKey.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906250836376_addedPriceToPackageAndOrder.resx">
-      <DependentUpon>201906250836376_addedPriceToPackageAndOrder.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
